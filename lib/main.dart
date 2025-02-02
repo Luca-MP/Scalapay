@@ -65,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
             },
           );
           return SafeArea(
-            minimum: const EdgeInsets.all(16),
+            minimum: const EdgeInsets.all(16).copyWith(bottom: 0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,

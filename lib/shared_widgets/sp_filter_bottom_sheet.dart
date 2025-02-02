@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:scalapay/shared_widgets/sp_filter_text_field.dart';
 import 'package:scalapay/sp_colors.dart';
 
 class SpFilterBottomSheet extends StatefulWidget {
@@ -17,12 +16,20 @@ class SpFilterBottomSheet extends StatefulWidget {
 }
 
 class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
-  TextEditingController minController = TextEditingController();
-  TextEditingController maxController = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _minController = TextEditingController();
+  final TextEditingController _maxController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _minController.text = "500";
+    _maxController.text = "2000";
+  }
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: EdgeInsets.zero.copyWith(
         bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -61,7 +68,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
               "Filtra",
               style: TextStyle(
                 fontWeight: FontWeight.w600,
-                fontSize: 15,
+                fontSize: 16,
               ),
             ),
             Column(
@@ -79,46 +86,140 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text("Fascia di prezzo"),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SPFilterTextField(
-                            title: "Minimo",
-                            minController: minController,
-                            maxController: maxController,
-                            isMin: true,
-                          ),
-                          Container(height: 1, width: 16, color: Colors.grey),
-                          SPFilterTextField(
-                            title: "Massimo",
-                            minController: minController,
-                            maxController: maxController,
-                            isMin: false,
-                          ),
-                        ],
+                      Form(
+                        key: _formKey,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 8),
+                              width: 160,
+                              child: TextFormField(
+                                maxLength: 4,
+                                textInputAction: TextInputAction.next,
+                                keyboardType: TextInputType.number,
+                                controller: _minController,
+                                onChanged: (value) {
+                                  if (value.isEmpty) return;
+                                },
+                                validator: _minMaxValidator,
+                                decoration: InputDecoration(
+                                  errorStyle: TextStyle(fontSize: 0),
+                                  counterText: "",
+                                  labelText: "Minimo",
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: const BorderSide(
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: const BorderSide(
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: const BorderSide(
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: const BorderSide(
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                ),
+                                onTapOutside: (_) => _focusNode.unfocus(),
+                              ),
+                            ),
+                            Container(height: 1, width: 16, color: Colors.grey),
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 8),
+                              width: 160,
+                              child: TextFormField(
+                                focusNode: _focusNode,
+                                maxLength: 4,
+                                textInputAction: TextInputAction.done,
+                                keyboardType: TextInputType.number,
+                                controller: _maxController,
+                                onChanged: (value) {
+                                  if (value.isEmpty) return;
+                                },
+                                validator: _maxValidator,
+                                decoration: InputDecoration(
+                                  errorStyle: const TextStyle(fontSize: 0),
+                                  counterText: "",
+                                  labelText: "Massimo",
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: const BorderSide(
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: const BorderSide(
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: const BorderSide(
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: const BorderSide(
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                ),
+                                onTapOutside: (_) => _focusNode.unfocus(),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    TextButton(
+                    FilledButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Colors.transparent),
+                        foregroundColor: MaterialStateProperty.all(SPColors.mainPurple),
+                      ),
                       onPressed: () {
                         widget.applyFilters(-1, -1);
                         Navigator.pop(context);
                       },
-                      child: Text("Cancella tutto"),
+                      child: Text("Cancella tutto", style: TextStyle(letterSpacing: 1.25),),
                     ),
+                    SizedBox(width: MediaQuery.of(context).size.width / 10),
                     FilledButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(SPColors.mainPurple)
+                      ),
                       onPressed: () {
-                        widget.applyFilters(
-                          int.tryParse(minController.value.text) ?? -1,
-                          int.tryParse(maxController.value.text) ?? -1,
-                        );
-                        Navigator.pop(context);
+                        if (_formKey.currentState!.validate()) {
+                          widget.applyFilters(
+                            int.tryParse(_minController.value.text) ?? -1,
+                            int.tryParse(_maxController.value.text) ?? -1,
+                          );
+                          // added delay to show to the user the selection
+                          Future.delayed(
+                            const Duration(milliseconds: 100),
+                            () => Navigator.pop(context),
+                          );
+                        }
                       },
-                      child: Text("Mostra risultati"),
+                      child: Text("Mostra risultati", style: TextStyle(letterSpacing: 1.25),),
                     ),
                   ],
                 ),
@@ -128,5 +229,39 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
         ),
       ),
     );
+  }
+
+  String? _minMaxValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Enter a value';
+    }
+
+    int? intValue = int.tryParse(value);
+    if (intValue == null) {
+      return 'Enter a valid integer';
+    }
+
+    if (intValue >= int.parse(_maxController.text)) {
+      return 'Lower than maximum';
+    }
+
+    return null;
+  }
+
+  String? _maxValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Enter a value';
+    }
+
+    int? intValue = int.tryParse(value);
+    if (intValue == null) {
+      return 'Enter a valid integer';
+    }
+
+    if (intValue <= int.parse(_minController.text)) {
+      return 'Greater than minimum';
+    }
+
+    return null;
   }
 }

@@ -57,7 +57,7 @@ class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
               "Ordina",
               style: TextStyle(
                 fontWeight: FontWeight.w600,
-                fontSize: 15,
+                fontSize: 16,
               ),
             ),
             Container(
@@ -75,6 +75,7 @@ class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
                     onChanged: (OrderType? value) => _orderType(context, value),
                     value: OrderType.asc,
                     groupValue: _type,
+                    fillColor: MaterialStateProperty.all(SPColors.mainPurple),
                   ),
                   const Divider(indent: 16, endIndent: 16),
                   RadioListTile(
@@ -82,6 +83,7 @@ class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
                     onChanged: (OrderType? value) => _orderType(context, value),
                     value: OrderType.desc,
                     groupValue: _type,
+                    fillColor: MaterialStateProperty.all(SPColors.mainPurple),
                   ),
                   const Divider(indent: 16, endIndent: 16),
                   RadioListTile(
@@ -89,6 +91,7 @@ class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
                     onChanged: (OrderType? value) => _orderType(context, value),
                     value: OrderType.az,
                     groupValue: _type,
+                    fillColor: MaterialStateProperty.all(SPColors.mainPurple),
                   ),
                   const Divider(indent: 16, endIndent: 16),
                   RadioListTile(
@@ -96,6 +99,7 @@ class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
                     onChanged: (OrderType? value) => _orderType(context, value),
                     value: OrderType.za,
                     groupValue: _type,
+                    fillColor: MaterialStateProperty.all(SPColors.mainPurple),
                   ),
                 ],
               ),

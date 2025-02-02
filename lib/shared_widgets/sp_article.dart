@@ -22,64 +22,56 @@ class SPArticle extends StatefulWidget {
 class _SPArticleState extends State<SPArticle> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-      ),
-      child: Column(
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(24),
-                topRight: Radius.circular(24),
+    return Column(
+      children: [
+        Container(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            color: SPColors.whiteBottomSheet,
+          ),
+          height: 220,
+          child: Container(child: widget.articleImage),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                widget.title,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14,
+                ),
               ),
-              color: SPColors.whiteBottomSheet,
-            ),
-            height: 195,
-            child: Container(child: widget.articleImage),
+              Text(
+                widget.store,
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                "${widget.price}€ or",
+                style: const TextStyle(
+                  fontSize: 13,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              Text(
+                "3 installments of\n€${(widget.price * 100 / 3).round() / 100}",
+                style: const TextStyle(
+                  fontSize: 15,
+                  color: Colors.blueAccent,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  widget.title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 13,
-                  ),
-                ),
-                Text(
-                  widget.store,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  "${widget.price}€ or",
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Text(
-                  "3 installments of\n€${(widget.price * 100 / 3).round() / 100}",
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.blueAccent,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

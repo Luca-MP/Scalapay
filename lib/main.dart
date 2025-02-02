@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   padding: EdgeInsets.only(left: 12, top: 80, bottom: 10),
                   child: Text(
                     "Esplora i prodotti",
-                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: 25),
+                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: 26),
                   ),
                 ),
                 TextFormField(
@@ -174,7 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 10,
-                      mainAxisExtent: 349,
+                      mainAxisExtent: 376,
                     ),
                     itemCount: 10,
                     itemBuilder: (context, index) {

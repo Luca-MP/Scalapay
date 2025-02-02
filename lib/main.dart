@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:scalapay/bloc/sp_bloc.dart';
 import 'package:scalapay/shared_widgets/sp_article.dart';
 import 'package:scalapay/shared_widgets/sp_assets.dart';
 import 'package:scalapay/shared_widgets/sp_filter_bottom_sheet.dart';
 import 'package:scalapay/shared_widgets/sp_order_bottom_sheet.dart';
 
+import 'injection.dart';
+
+final GetIt getIt = GetIt.instance;
+
 void main() {
+  configureDependencies();
   runApp(
     BlocProvider(
-      create: (_) => SpBloc(),
+      create: (_) => getIt<SpBloc>(),
       child: const MyApp(),
     ),
   );
@@ -130,7 +136,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           builder: (context) => SpFilterBottomSheet(
                             context: context,
                             showResults: (min, max) {
-                              print("Min: $min, Max: $max");
+                              BlocProvider.of<SpBloc>(context).add(
+                                SpEvent.filter(min: min, max: max),
+                              );
                             },
                           ),
                         ),
@@ -149,7 +157,11 @@ class _MyHomePageState extends State<MyHomePage> {
                           context: context,
                           builder: (context) => SpOrderBottomSheet(
                             context: context,
-                            orderType: (type) => print("Order typer: $type"),
+                            orderType: (type) {
+                              BlocProvider.of<SpBloc>(context).add(
+                                SpEvent.orderBy(orderType: type),
+                              );
+                            },
                           ),
                         ),
                       ),

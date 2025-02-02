@@ -29,7 +29,7 @@ class _SPArticleState extends State<SPArticle> {
             borderRadius: BorderRadius.all(Radius.circular(20)),
             color: SPColors.whiteBottomSheet,
           ),
-          height: 220,
+          height: 208,
           child: Container(child: widget.articleImage),
         ),
         Padding(

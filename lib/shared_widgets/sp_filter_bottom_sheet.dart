@@ -42,7 +42,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
           ),
           color: SPColors.whiteBottomSheet,
         ),
-        height: 320,
+        height: 340,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -93,7 +93,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
                           children: [
                             Container(
                               padding: EdgeInsets.symmetric(horizontal: 8),
-                              width: 160,
+                              width: 150,
                               child: TextFormField(
                                 maxLength: 4,
                                 textInputAction: TextInputAction.next,
@@ -138,7 +138,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
                             Container(height: 1, width: 16, color: Colors.grey),
                             Container(
                               padding: EdgeInsets.symmetric(horizontal: 8),
-                              width: 160,
+                              width: 150,
                               child: TextFormField(
                                 focusNode: _focusNode,
                                 maxLength: 4,

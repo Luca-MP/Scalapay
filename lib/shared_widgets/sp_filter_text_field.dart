@@ -20,17 +20,14 @@ class SPFilterTextField extends StatefulWidget {
 
 class _SPFilterTextFieldState extends State<SPFilterTextField> {
   final FocusNode _focusNode = FocusNode();
-  late int minValue;
-  late int maxValue;
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  int minValue = 500;
+  int maxValue = 2000;
 
   @override
   void initState() {
     super.initState();
-    widget.minController.text = '500';
-    widget.maxController.text = '100';
-    minValue = int.parse(widget.minController.text);
-    maxValue = int.parse(widget.maxController.text);
+    widget.minController.text = minValue.toString();
+    widget.maxController.text = maxValue.toString();
   }
 
   @override
@@ -39,7 +36,6 @@ class _SPFilterTextFieldState extends State<SPFilterTextField> {
       padding: const EdgeInsets.symmetric(horizontal: 8),
       width: 160,
       child: TextFormField(
-        key: _formKey,
         focusNode: _focusNode,
         maxLength: 4,
         textInputAction: widget.isMin ? TextInputAction.next : TextInputAction.done,

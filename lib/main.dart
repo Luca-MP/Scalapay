@@ -6,6 +6,7 @@ import 'package:scalapay/shared_widgets/sp_article.dart';
 import 'package:scalapay/shared_widgets/sp_assets.dart';
 import 'package:scalapay/shared_widgets/sp_filter_bottom_sheet.dart';
 import 'package:scalapay/shared_widgets/sp_order_bottom_sheet.dart';
+import 'package:scalapay/sp_colors.dart';
 
 import 'injection.dart';
 
@@ -27,10 +28,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: ThemeData(useMaterial3: true),
       home: const MyHomePage(),
     );
   }
@@ -62,7 +60,9 @@ class _MyHomePageState extends State<MyHomePage> {
       body: BlocBuilder<SpBloc, SpState>(
         builder: (context, state) {
           state.whenOrNull(
-            initial: () {},
+            initial: () {
+              //todo
+            },
           );
           return SafeArea(
             minimum: const EdgeInsets.all(16),
@@ -70,9 +70,9 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 12, top: 80, bottom: 10),
-                  child: const Text(
+                const Padding(
+                  padding: EdgeInsets.only(left: 12, top: 80, bottom: 10),
+                  child: Text(
                     "Esplora i prodotti",
                     style: TextStyle(fontWeight: FontWeight.w700, fontSize: 25),
                   ),
@@ -88,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(40),
-                          color: Color.fromARGB(255, 87, 100, 236),
+                          color: SPColors.mainPurple
                         ),
                         child: IconButton(
                           icon: const Icon(Icons.search),
@@ -127,15 +127,15 @@ class _MyHomePageState extends State<MyHomePage> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(24),
                         ),
-                        backgroundColor: Color.fromARGB(255, 246, 247, 251),
-                        label: Text("Filtri"),
+                        backgroundColor: SPColors.whiteChip,
+                        label: const Text("Filtri"),
                         avatar: SPAssets.filter,
                         onSelected: (bool value) => showModalBottomSheet(
                           isScrollControlled: true,
                           context: context,
                           builder: (context) => SpFilterBottomSheet(
                             context: context,
-                            showResults: (min, max) {
+                            applyFilters: (min, max) {
                               BlocProvider.of<SpBloc>(context).add(
                                 SpEvent.filter(min: min, max: max),
                               );
@@ -149,15 +149,15 @@ class _MyHomePageState extends State<MyHomePage> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(24),
                         ),
-                        backgroundColor: Color.fromARGB(255, 246, 247, 251),
-                        label: Text("Ordina"),
+                        backgroundColor: SPColors.whiteChip,
+                        label: const Text("Ordina"),
                         avatar: SPAssets.order,
                         onSelected: (_) => showModalBottomSheet(
                           isScrollControlled: true,
                           context: context,
                           builder: (context) => SpOrderBottomSheet(
                             context: context,
-                            orderType: (type) {
+                            applyOrderType: (type) {
                               BlocProvider.of<SpBloc>(context).add(
                                 SpEvent.orderBy(orderType: type),
                               );
@@ -171,7 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Expanded(
                   child: GridView.builder(
                     shrinkWrap: true,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 10,
                       mainAxisExtent: 349,

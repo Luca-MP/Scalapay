@@ -9,18 +9,18 @@ class ProductService {
   Dio dio = ApiManager().provideDio();
 
   Future<List<SPProduct>> getProducts(
-      String query,
-      int per_page,
-      int page,
-      String filter_by,
-      String sort_by,
-      double minPrice,
-      double maxPrice,
-      String partnerId,
-      String source,
-      String language,
-      String country,
-      ) async {
+    String query,
+    int per_page,
+    int page,
+    String filter_by,
+    String sort_by,
+    double minPrice,
+    double maxPrice,
+    String partnerId,
+    String source,
+    String language,
+    String country,
+  ) async {
     Map<String, dynamic> params = {
       "q": query,
       "per_page": per_page,

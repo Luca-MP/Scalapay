@@ -9,6 +9,7 @@ class SPProduct with _$SPProduct {
     required String name,
     required int price,
   }) = _SPProduct;
+
   factory SPProduct.fromJson(Map<String, dynamic> json) =>
       _$SPProductFromJson(json);
 }

@@ -18,7 +18,7 @@ class SpBloc extends Bloc<SpEvent, SpState> {
       (event, emit) async {
         await event.when(
           search: (searchText) async {
-            _productService.getProducts(
+            /*_productService.getProducts(
               searchText ?? "",
               30,
               1,
@@ -30,14 +30,14 @@ class SpBloc extends Bloc<SpEvent, SpState> {
               "trovaprezzi",
               "it",
               "IT",
-            );
-            print("searchText: $searchText");
+            );*/
+            print("Item searched: $searchText");
           },
           filter: (min, max) async {
-            print("min: $min, max: $max");
+            print("Price filter: form $min to $max");
           },
           orderBy: (orderType) async {
-            print("orderType: $orderType");
+            print("Order by: $orderType");
           },
         );
       },

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:scalapay/shared_widgets/sp_filter_text_field.dart';
+import 'package:scalapay/sp_colors.dart';
 
 class SpFilterBottomSheet extends StatefulWidget {
   final BuildContext context;
-  final void Function(int min, int max) showResults;
+  final void Function(int min, int max) applyFilters;
 
   const SpFilterBottomSheet({
     super.key,
     required this.context,
-    required this.showResults,
+    required this.applyFilters,
   });
 
   @override
@@ -27,6 +28,13 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
         bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
       child: Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+          color: SPColors.whiteBottomSheet,
+        ),
         height: 320,
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -36,7 +44,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
               height: 6,
               width: 50,
               decoration: BoxDecoration(
-                color: Colors.grey,
+                color: SPColors.greyDivider,
                 borderRadius: BorderRadius.circular(24),
               ),
             ),
@@ -44,21 +52,24 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
               alignment: Alignment.topRight,
               widthFactor: 8.5,
               child: IconButton(
-                icon: const Icon(Icons.close_rounded),
+                icon: const Icon(Icons.close_rounded, color: Colors.black),
                 iconSize: 32,
                 onPressed: () => Navigator.pop(context),
               ),
             ),
-            Text(
+            const Text(
               "Filtra",
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 15,
+              ),
             ),
             Column(
               children: [
                 Container(
                   height: 140,
-                  margin: EdgeInsets.all(16),
-                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  margin: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
@@ -67,7 +78,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Fascia di prezzo"),
+                      const Text("Fascia di prezzo"),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -77,11 +88,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
                             maxController: maxController,
                             isMin: true,
                           ),
-                          Container(
-                            height: 1,
-                            width: 16,
-                            color: Colors.grey,
-                          ),
+                          Container(height: 1, width: 16, color: Colors.grey),
                           SPFilterTextField(
                             title: "Massimo",
                             minController: minController,
@@ -98,14 +105,14 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
                   children: [
                     TextButton(
                       onPressed: () {
-                        widget.showResults(-1, -1);
+                        widget.applyFilters(-1, -1);
                         Navigator.pop(context);
                       },
                       child: Text("Cancella tutto"),
                     ),
                     FilledButton(
                       onPressed: () {
-                        widget.showResults(
+                        widget.applyFilters(
                           int.tryParse(minController.value.text) ?? -1,
                           int.tryParse(maxController.value.text) ?? -1,
                         );

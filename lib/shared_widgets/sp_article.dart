@@ -69,7 +69,7 @@ class _SPArticleState extends State<SPArticle> {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

@@ -15,7 +15,7 @@ class SpOrderBottomSheet extends StatefulWidget {
 }
 
 class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
-  OrderType _orderType = OrderType.asc;
+  OrderType _type = OrderType.asc;
 
   @override
   Widget build(BuildContext context) {
@@ -61,30 +61,30 @@ class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
                 children: [
                   RadioListTile<OrderType>(
                     title: Text("Prezzo crescente"),
-                    onChanged: (OrderType? value) => orderType(context, value),
+                    onChanged: (OrderType? value) => _orderType(context, value),
                     value: OrderType.asc,
-                    groupValue: _orderType,
+                    groupValue: _type,
                   ),
                   Divider(indent: 16, endIndent: 16),
                   RadioListTile<OrderType>(
                     title: Text("Prezzo decrescente"),
-                    onChanged: (OrderType? value) => orderType(context, value),
+                    onChanged: (OrderType? value) => _orderType(context, value),
                     value: OrderType.desc,
-                    groupValue: _orderType,
+                    groupValue: _type,
                   ),
                   Divider(indent: 16, endIndent: 16),
                   RadioListTile<OrderType>(
                     title: Text("Nome A - Z"),
-                    onChanged: (OrderType? value) => orderType(context, value),
+                    onChanged: (OrderType? value) => _orderType(context, value),
                     value: OrderType.az,
-                    groupValue: _orderType,
+                    groupValue: _type,
                   ),
                   Divider(indent: 16, endIndent: 16),
                   RadioListTile<OrderType>(
                     title: Text("Nome Z - A"),
-                    onChanged: (OrderType? value) => orderType(context, value),
+                    onChanged: (OrderType? value) => _orderType(context, value),
                     value: OrderType.za,
-                    groupValue: _orderType,
+                    groupValue: _type,
                   ),
                 ],
               ),
@@ -95,9 +95,9 @@ class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
     );
   }
 
-  orderType(BuildContext context, OrderType? orderType) {
-    setState(() => _orderType = orderType!);
-    widget.orderType(_orderType);
+  _orderType(BuildContext context, OrderType? orderType) {
+    setState(() => _type = orderType!);
+    widget.orderType(_type);
 
     // added delay to show to the user the selection
     Future.delayed(

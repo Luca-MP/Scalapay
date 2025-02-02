@@ -72,11 +72,4 @@ class _SPFilterTextFieldState extends State<SPFilterTextField> {
       ),
     );
   }
-
-/*  @override
-  void dispose() {
-    widget.minController.dispose();
-    widget.maxController.dispose();
-    super.dispose();
-  }*/
 }

@@ -46,7 +46,7 @@ class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
             ),
             Align(
               alignment: Alignment.topRight,
-              widthFactor: 8.5,
+              widthFactor: 8.3,
               child: IconButton(
                 icon: const Icon(Icons.close_rounded),
                 iconSize: 32,

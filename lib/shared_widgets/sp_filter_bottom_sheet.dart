@@ -57,7 +57,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
             ),
             Align(
               alignment: Alignment.topRight,
-              widthFactor: 8.5,
+              widthFactor: 8.3,
               child: IconButton(
                 icon: const Icon(Icons.close_rounded, color: Colors.black),
                 iconSize: 32,

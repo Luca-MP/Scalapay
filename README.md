@@ -7,6 +7,7 @@ Benvenuto in **Scalapay Test**, un'app Flutter moderna e intuitiva che consente 
 ### **Ricerca prodotti**
 - Ricerca rapida dei prodotti tramite una barra di ricerca.
 - Puoi cercare per nome, categoria o altri dettagli del prodotto.
+- Supporta la funzionalità di pull-down to refresh e la gestione degli errori di caricamento dei prodotti
 
 ### **Filtraggio per prezzo**
 - Possibilità di filtrare i prodotti in base al loro prezzo per trovare rapidamente quello che cerchi.
@@ -21,14 +22,22 @@ Benvenuto in **Scalapay Test**, un'app Flutter moderna e intuitiva che consente 
 - **Gestione dello stato reattiva**: Per gestire complesse logiche di stato in modo organizzato e scalabile.
 - **Testabilità**: Favorisce il testing isolato e un codice più pulito.
 
+### **Perché GetIt**?
+- **Semplicità**: Libreria leggera per la gestione delle dipendenze in Flutter, che rende il codice più pulito, modulare e facilmente testabile.
+- **Testabilità**: Favorisce il testing isolato e un codice più pulito.
+
+### **Altro**
+- **Icona**: L'icona dell'app è stata sostituita sia su Android tramite l'Image Asset mentre per iOS con un online icon generator online.
+- **Nome app**: Il nome dell'app è stata sostituito sia su Android tramite l'AndroidManifest.xml mentre per iOS all'interno dell'Runner.xcodeproj.
+
 ### **Librerie Utilizzate**
 | Libreria                           | Versione | Descrizione                            |
 |------------------------------------|----------|----------------------------------------|
 | **`dio`**                          | 5.7.0    | HTTP client per fetchare i prodotti.   |
-| **`get_it`**                       | 8.1.4    | Per implementare la DI.                |
+| **`get_it`**                       | 8.1.4    | Supporto alla DI.                |
 | **`flutter_bloc`**                 | 8.1.5    | Gestione stato scalabile.              |
 | **`infinite_scroll_pagination`**   | 4.0.0    | Paginazione dei risultati di ricerca.  |
-| **`url_launcher`**                 | 6.3.1    | Apertura link                          |
+| **`url_launcher`**                 | 6.3.1    | Apertura link.                         |
 
 
 ## 🏁 **Avvio del Progetto**

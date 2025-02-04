@@ -23,6 +23,7 @@ mixin _$SpEvent {
         search,
     required TResult Function(int? min, int? max) filter,
     required TResult Function(OrderType? orderType) orderBy,
+    required TResult Function(String url) openLink,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +33,7 @@ mixin _$SpEvent {
         search,
     TResult? Function(int? min, int? max)? filter,
     TResult? Function(OrderType? orderType)? orderBy,
+    TResult? Function(String url)? openLink,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +43,7 @@ mixin _$SpEvent {
         search,
     TResult Function(int? min, int? max)? filter,
     TResult Function(OrderType? orderType)? orderBy,
+    TResult Function(String url)? openLink,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -49,6 +52,7 @@ mixin _$SpEvent {
     required TResult Function(_Search value) search,
     required TResult Function(_Filter value) filter,
     required TResult Function(_OrderBy value) orderBy,
+    required TResult Function(_OpenLink value) openLink,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +60,7 @@ mixin _$SpEvent {
     TResult? Function(_Search value)? search,
     TResult? Function(_Filter value)? filter,
     TResult? Function(_OrderBy value)? orderBy,
+    TResult? Function(_OpenLink value)? openLink,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +68,7 @@ mixin _$SpEvent {
     TResult Function(_Search value)? search,
     TResult Function(_Filter value)? filter,
     TResult Function(_OrderBy value)? orderBy,
+    TResult Function(_OpenLink value)? openLink,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -190,6 +196,7 @@ class _$SearchImpl implements _Search {
         search,
     required TResult Function(int? min, int? max) filter,
     required TResult Function(OrderType? orderType) orderBy,
+    required TResult Function(String url) openLink,
   }) {
     return search(searchText, pageSize, pageKey, pagingController);
   }
@@ -202,6 +209,7 @@ class _$SearchImpl implements _Search {
         search,
     TResult? Function(int? min, int? max)? filter,
     TResult? Function(OrderType? orderType)? orderBy,
+    TResult? Function(String url)? openLink,
   }) {
     return search?.call(searchText, pageSize, pageKey, pagingController);
   }
@@ -214,6 +222,7 @@ class _$SearchImpl implements _Search {
         search,
     TResult Function(int? min, int? max)? filter,
     TResult Function(OrderType? orderType)? orderBy,
+    TResult Function(String url)? openLink,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -228,6 +237,7 @@ class _$SearchImpl implements _Search {
     required TResult Function(_Search value) search,
     required TResult Function(_Filter value) filter,
     required TResult Function(_OrderBy value) orderBy,
+    required TResult Function(_OpenLink value) openLink,
   }) {
     return search(this);
   }
@@ -238,6 +248,7 @@ class _$SearchImpl implements _Search {
     TResult? Function(_Search value)? search,
     TResult? Function(_Filter value)? filter,
     TResult? Function(_OrderBy value)? orderBy,
+    TResult? Function(_OpenLink value)? openLink,
   }) {
     return search?.call(this);
   }
@@ -248,6 +259,7 @@ class _$SearchImpl implements _Search {
     TResult Function(_Search value)? search,
     TResult Function(_Filter value)? filter,
     TResult Function(_OrderBy value)? orderBy,
+    TResult Function(_OpenLink value)? openLink,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -351,6 +363,7 @@ class _$FilterImpl implements _Filter {
         search,
     required TResult Function(int? min, int? max) filter,
     required TResult Function(OrderType? orderType) orderBy,
+    required TResult Function(String url) openLink,
   }) {
     return filter(min, max);
   }
@@ -363,6 +376,7 @@ class _$FilterImpl implements _Filter {
         search,
     TResult? Function(int? min, int? max)? filter,
     TResult? Function(OrderType? orderType)? orderBy,
+    TResult? Function(String url)? openLink,
   }) {
     return filter?.call(min, max);
   }
@@ -375,6 +389,7 @@ class _$FilterImpl implements _Filter {
         search,
     TResult Function(int? min, int? max)? filter,
     TResult Function(OrderType? orderType)? orderBy,
+    TResult Function(String url)? openLink,
     required TResult orElse(),
   }) {
     if (filter != null) {
@@ -389,6 +404,7 @@ class _$FilterImpl implements _Filter {
     required TResult Function(_Search value) search,
     required TResult Function(_Filter value) filter,
     required TResult Function(_OrderBy value) orderBy,
+    required TResult Function(_OpenLink value) openLink,
   }) {
     return filter(this);
   }
@@ -399,6 +415,7 @@ class _$FilterImpl implements _Filter {
     TResult? Function(_Search value)? search,
     TResult? Function(_Filter value)? filter,
     TResult? Function(_OrderBy value)? orderBy,
+    TResult? Function(_OpenLink value)? openLink,
   }) {
     return filter?.call(this);
   }
@@ -409,6 +426,7 @@ class _$FilterImpl implements _Filter {
     TResult Function(_Search value)? search,
     TResult Function(_Filter value)? filter,
     TResult Function(_OrderBy value)? orderBy,
+    TResult Function(_OpenLink value)? openLink,
     required TResult orElse(),
   }) {
     if (filter != null) {
@@ -499,6 +517,7 @@ class _$OrderByImpl implements _OrderBy {
         search,
     required TResult Function(int? min, int? max) filter,
     required TResult Function(OrderType? orderType) orderBy,
+    required TResult Function(String url) openLink,
   }) {
     return orderBy(orderType);
   }
@@ -511,6 +530,7 @@ class _$OrderByImpl implements _OrderBy {
         search,
     TResult? Function(int? min, int? max)? filter,
     TResult? Function(OrderType? orderType)? orderBy,
+    TResult? Function(String url)? openLink,
   }) {
     return orderBy?.call(orderType);
   }
@@ -523,6 +543,7 @@ class _$OrderByImpl implements _OrderBy {
         search,
     TResult Function(int? min, int? max)? filter,
     TResult Function(OrderType? orderType)? orderBy,
+    TResult Function(String url)? openLink,
     required TResult orElse(),
   }) {
     if (orderBy != null) {
@@ -537,6 +558,7 @@ class _$OrderByImpl implements _OrderBy {
     required TResult Function(_Search value) search,
     required TResult Function(_Filter value) filter,
     required TResult Function(_OrderBy value) orderBy,
+    required TResult Function(_OpenLink value) openLink,
   }) {
     return orderBy(this);
   }
@@ -547,6 +569,7 @@ class _$OrderByImpl implements _OrderBy {
     TResult? Function(_Search value)? search,
     TResult? Function(_Filter value)? filter,
     TResult? Function(_OrderBy value)? orderBy,
+    TResult? Function(_OpenLink value)? openLink,
   }) {
     return orderBy?.call(this);
   }
@@ -557,6 +580,7 @@ class _$OrderByImpl implements _OrderBy {
     TResult Function(_Search value)? search,
     TResult Function(_Filter value)? filter,
     TResult Function(_OrderBy value)? orderBy,
+    TResult Function(_OpenLink value)? openLink,
     required TResult orElse(),
   }) {
     if (orderBy != null) {
@@ -572,6 +596,157 @@ abstract class _OrderBy implements SpEvent {
   OrderType? get orderType;
   @JsonKey(ignore: true)
   _$$OrderByImplCopyWith<_$OrderByImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$OpenLinkImplCopyWith<$Res> {
+  factory _$$OpenLinkImplCopyWith(
+          _$OpenLinkImpl value, $Res Function(_$OpenLinkImpl) then) =
+      __$$OpenLinkImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String url});
+}
+
+/// @nodoc
+class __$$OpenLinkImplCopyWithImpl<$Res>
+    extends _$SpEventCopyWithImpl<$Res, _$OpenLinkImpl>
+    implements _$$OpenLinkImplCopyWith<$Res> {
+  __$$OpenLinkImplCopyWithImpl(
+      _$OpenLinkImpl _value, $Res Function(_$OpenLinkImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? url = null,
+  }) {
+    return _then(_$OpenLinkImpl(
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$OpenLinkImpl implements _OpenLink {
+  const _$OpenLinkImpl({required this.url});
+
+  @override
+  final String url;
+
+  @override
+  String toString() {
+    return 'SpEvent.openLink(url: $url)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OpenLinkImpl &&
+            (identical(other.url, url) || other.url == url));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, url);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OpenLinkImplCopyWith<_$OpenLinkImpl> get copyWith =>
+      __$$OpenLinkImplCopyWithImpl<_$OpenLinkImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String searchText, int pageSize, int pageKey,
+            PagingController<dynamic, dynamic> pagingController)
+        search,
+    required TResult Function(int? min, int? max) filter,
+    required TResult Function(OrderType? orderType) orderBy,
+    required TResult Function(String url) openLink,
+  }) {
+    return openLink(url);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String searchText, int pageSize, int pageKey,
+            PagingController<dynamic, dynamic> pagingController)?
+        search,
+    TResult? Function(int? min, int? max)? filter,
+    TResult? Function(OrderType? orderType)? orderBy,
+    TResult? Function(String url)? openLink,
+  }) {
+    return openLink?.call(url);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String searchText, int pageSize, int pageKey,
+            PagingController<dynamic, dynamic> pagingController)?
+        search,
+    TResult Function(int? min, int? max)? filter,
+    TResult Function(OrderType? orderType)? orderBy,
+    TResult Function(String url)? openLink,
+    required TResult orElse(),
+  }) {
+    if (openLink != null) {
+      return openLink(url);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Search value) search,
+    required TResult Function(_Filter value) filter,
+    required TResult Function(_OrderBy value) orderBy,
+    required TResult Function(_OpenLink value) openLink,
+  }) {
+    return openLink(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Search value)? search,
+    TResult? Function(_Filter value)? filter,
+    TResult? Function(_OrderBy value)? orderBy,
+    TResult? Function(_OpenLink value)? openLink,
+  }) {
+    return openLink?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Search value)? search,
+    TResult Function(_Filter value)? filter,
+    TResult Function(_OrderBy value)? orderBy,
+    TResult Function(_OpenLink value)? openLink,
+    required TResult orElse(),
+  }) {
+    if (openLink != null) {
+      return openLink(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OpenLink implements SpEvent {
+  const factory _OpenLink({required final String url}) = _$OpenLinkImpl;
+
+  String get url;
+  @JsonKey(ignore: true)
+  _$$OpenLinkImplCopyWith<_$OpenLinkImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

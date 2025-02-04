@@ -31,6 +31,11 @@ class SpBloc extends Bloc<SpEvent, SpState> {
           orderBy: (orderType) async {
             print("Order by: $orderType");
           },
+          openLink: (url) async {
+            /*if (!await launchUrl(url as Uri)) {
+              throw Exception('Could not launch $url');
+            }*/
+          }
         );
       },
     );

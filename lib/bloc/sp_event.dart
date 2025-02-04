@@ -15,4 +15,6 @@ class SpEvent with _$SpEvent {
   }) = _Filter;
 
   const factory SpEvent.orderBy({required OrderType? orderType}) = _OrderBy;
+
+  const factory SpEvent.openLink({required String url}) = _OpenLink;
 }

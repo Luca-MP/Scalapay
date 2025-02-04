@@ -26,7 +26,6 @@ if (flutterVersionName == null) {
 android {
     namespace = "com.pezzotta.scalapay"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

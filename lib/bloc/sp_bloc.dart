@@ -1,12 +1,11 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:scalapay/data/models/sp_grouped_hits/sp_grouped_hits.dart';
 import 'package:scalapay/data/productService.dart';
-import 'package:scalapay/main.dart';
 import 'package:scalapay/shared_widgets/sp_order_bottom_sheet.dart';
 import 'package:injectable/injectable.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 part 'sp_bloc.freezed.dart';
 part 'sp_event.dart';
@@ -32,23 +31,23 @@ class SpBloc extends Bloc<SpEvent, SpState> {
             print("Order by: $orderType");
           },
           openLink: (url) async {
-            /*if (!await launchUrl(url as Uri)) {
+            if (!await launchUrl(Uri.parse(url))) {
               throw Exception('Could not launch $url');
-            }*/
-          }
+            }
+          },
         );
       },
     );
   }
 
   Future<void> _fetchPage(
-      String searchText,
-      int pageSize,
-      int pageKey,
-      PagingController pagingController,
-      ) async {
+    String searchText,
+    int pageSize,
+    int pageKey,
+    PagingController pagingController,
+  ) async {
     try {
-      final products = await getIt<ProductService>().getProducts(
+      final products = await _productService.getProducts(
         query: searchText,
         per_page: pageSize,
         page: pageKey,

@@ -1,11 +1,11 @@
-# Scalapay X Nike
+# Scalapay Test
 
-Benvenuto nel **Scalapay X Nike**, un'app Flutter moderna e intuitiva che consente di ricercare, filtrare e ordinare i prodotti Nike con facilità. L'interfaccia utente è stata progettata per essere semplice da usare e visivamente accattivante, offrendo un'esperienza fluida sda smartphone.
+Benvenuto in **Scalapay Test**, un'app Flutter moderna e intuitiva che consente di ricercare, filtrare e ordinare i prodotti con facilità. L'interfaccia utente è stata progettata per essere semplice da usare e visivamente accattivante, offrendo un'esperienza fluida su smartphone.
 
 ## 🌟Funzionalità
 
-### **Ricerca prodotti Nike**
-- Ricerca rapida dei prodotti Nike tramite una barra di ricerca.
+### **Ricerca prodotti**
+- Ricerca rapida dei prodotti tramite una barra di ricerca.
 - Puoi cercare per nome, categoria o altri dettagli del prodotto.
 
 ### **Filtraggio per prezzo**
@@ -22,12 +22,13 @@ Benvenuto nel **Scalapay X Nike**, un'app Flutter moderna e intuitiva che consen
 - **Testabilità**: Favorisce il testing isolato e un codice più pulito.
 
 ### **Librerie Utilizzate**
-| Libreria                          | Versione | Descrizione                           |
-|-----------------------------------|----------|---------------------------------------|
-| **`dio`**                         | 5.7.0    | HTTP client per fetchare i prodotti.  |
-| **`get_it`**                      | 8.1.4    | Per implementare la DI.               |
-| **`flutter_bloc`**                | 8.1.5    | Gestione stato scalabile.             |
-| **`infinite_scroll_pagination`**  | 4.0.0    | Paginazione dei risultati di ricerca. |
+| Libreria                           | Versione | Descrizione                            |
+|------------------------------------|----------|----------------------------------------|
+| **`dio`**                          | 5.7.0    | HTTP client per fetchare i prodotti.   |
+| **`get_it`**                       | 8.1.4    | Per implementare la DI.                |
+| **`flutter_bloc`**                 | 8.1.5    | Gestione stato scalabile.              |
+| **`infinite_scroll_pagination`**   | 4.0.0    | Paginazione dei risultati di ricerca.  |
+| **`url_launcher`**                 | 6.3.1    | Apertura link                          |
 
 
 ## 🏁 **Avvio del Progetto**
@@ -38,6 +39,7 @@ Benvenuto nel **Scalapay X Nike**, un'app Flutter moderna e intuitiva che consen
 
 ### Prerequisiti Android
 - **Gradle version:** 8.5
+- **AGP version:** 8.2.0
 - **Java version:** 21.0.4
 - **Android Studio version:** Ladybug Feature Drop | 2024.2.2
 

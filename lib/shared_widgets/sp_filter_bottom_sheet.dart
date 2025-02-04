@@ -192,8 +192,8 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
                   children: [
                     FilledButton(
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.transparent),
-                        foregroundColor: MaterialStateProperty.all(SPColors.mainPurple),
+                        backgroundColor: WidgetStateProperty.all(Colors.transparent),
+                        foregroundColor: WidgetStateProperty.all(SPColors.mainPurple),
                       ),
                       onPressed: () {
                         widget.applyFilters(-1, -1);
@@ -204,7 +204,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
                     SizedBox(width: MediaQuery.of(context).size.width / 10),
                     FilledButton(
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(SPColors.mainPurple)
+                        backgroundColor: WidgetStateProperty.all(SPColors.mainPurple)
                       ),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {

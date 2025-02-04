@@ -75,7 +75,7 @@ class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
                     onChanged: (OrderType? value) => _orderType(context, value),
                     value: OrderType.asc,
                     groupValue: _type,
-                    fillColor: MaterialStateProperty.all(SPColors.mainPurple),
+                    fillColor: WidgetStateProperty.all(SPColors.mainPurple),
                   ),
                   const Divider(indent: 16, endIndent: 16),
                   RadioListTile(
@@ -83,7 +83,7 @@ class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
                     onChanged: (OrderType? value) => _orderType(context, value),
                     value: OrderType.desc,
                     groupValue: _type,
-                    fillColor: MaterialStateProperty.all(SPColors.mainPurple),
+                    fillColor: WidgetStateProperty.all(SPColors.mainPurple),
                   ),
                   const Divider(indent: 16, endIndent: 16),
                   RadioListTile(
@@ -91,7 +91,7 @@ class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
                     onChanged: (OrderType? value) => _orderType(context, value),
                     value: OrderType.az,
                     groupValue: _type,
-                    fillColor: MaterialStateProperty.all(SPColors.mainPurple),
+                    fillColor: WidgetStateProperty.all(SPColors.mainPurple),
                   ),
                   const Divider(indent: 16, endIndent: 16),
                   RadioListTile(
@@ -99,7 +99,7 @@ class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
                     onChanged: (OrderType? value) => _orderType(context, value),
                     value: OrderType.za,
                     groupValue: _type,
-                    fillColor: MaterialStateProperty.all(SPColors.mainPurple),
+                    fillColor: WidgetStateProperty.all(SPColors.mainPurple),
                   ),
                 ],
               ),

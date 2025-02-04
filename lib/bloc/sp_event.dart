@@ -2,7 +2,12 @@ part of 'sp_bloc.dart';
 
 @freezed
 class SpEvent with _$SpEvent {
-  const factory SpEvent.search({required String? searchText}) = _Search;
+  const factory SpEvent.search({
+    required String searchText,
+    required int pageSize,
+    required int pageKey,
+    required PagingController pagingController,
+  }) = _Search;
 
   const factory SpEvent.filter({
     required int? min,

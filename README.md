@@ -22,11 +22,12 @@ Benvenuto nel **Scalapay X Nike**, un'app Flutter moderna e intuitiva che consen
 - **Testabilità**: Favorisce il testing isolato e un codice più pulito.
 
 ### **Librerie Utilizzate**
-| Libreria                        | Versione  | Descrizione                                 |
-|---------------------------------|-----------|---------------------------------------------|
-| **`dio`**                       | 5.7.0    | HTTP client per fetchare i prodotti.        |
-| **`get_it`**                    | 8.1.4    | Per implementare la DI.                     |
-| **`flutter_bloc`**              | 8.1.5    | Gestione stato scalabile.                   |
+| Libreria                          | Versione | Descrizione                           |
+|-----------------------------------|----------|---------------------------------------|
+| **`dio`**                         | 5.7.0    | HTTP client per fetchare i prodotti.  |
+| **`get_it`**                      | 8.1.4    | Per implementare la DI.               |
+| **`flutter_bloc`**                | 8.1.5    | Gestione stato scalabile.             |
+| **`infinite_scroll_pagination`**  | 4.0.0    | Paginazione dei risultati di ricerca. |
 
 
 ## 🏁 **Avvio del Progetto**

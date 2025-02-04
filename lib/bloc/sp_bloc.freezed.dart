@@ -18,21 +18,27 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SpEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? searchText) search,
+    required TResult Function(String searchText, int pageSize, int pageKey,
+            PagingController<dynamic, dynamic> pagingController)
+        search,
     required TResult Function(int? min, int? max) filter,
     required TResult Function(OrderType? orderType) orderBy,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? searchText)? search,
+    TResult? Function(String searchText, int pageSize, int pageKey,
+            PagingController<dynamic, dynamic> pagingController)?
+        search,
     TResult? Function(int? min, int? max)? filter,
     TResult? Function(OrderType? orderType)? orderBy,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? searchText)? search,
+    TResult Function(String searchText, int pageSize, int pageKey,
+            PagingController<dynamic, dynamic> pagingController)?
+        search,
     TResult Function(int? min, int? max)? filter,
     TResult Function(OrderType? orderType)? orderBy,
     required TResult orElse(),
@@ -85,7 +91,11 @@ abstract class _$$SearchImplCopyWith<$Res> {
           _$SearchImpl value, $Res Function(_$SearchImpl) then) =
       __$$SearchImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String? searchText});
+  $Res call(
+      {String searchText,
+      int pageSize,
+      int pageKey,
+      PagingController<dynamic, dynamic> pagingController});
 }
 
 /// @nodoc
@@ -99,13 +109,28 @@ class __$$SearchImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? searchText = freezed,
+    Object? searchText = null,
+    Object? pageSize = null,
+    Object? pageKey = null,
+    Object? pagingController = null,
   }) {
     return _then(_$SearchImpl(
-      searchText: freezed == searchText
+      searchText: null == searchText
           ? _value.searchText
           : searchText // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      pageSize: null == pageSize
+          ? _value.pageSize
+          : pageSize // ignore: cast_nullable_to_non_nullable
+              as int,
+      pageKey: null == pageKey
+          ? _value.pageKey
+          : pageKey // ignore: cast_nullable_to_non_nullable
+              as int,
+      pagingController: null == pagingController
+          ? _value.pagingController
+          : pagingController // ignore: cast_nullable_to_non_nullable
+              as PagingController<dynamic, dynamic>,
     ));
   }
 }
@@ -113,14 +138,24 @@ class __$$SearchImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SearchImpl implements _Search {
-  const _$SearchImpl({required this.searchText});
+  const _$SearchImpl(
+      {required this.searchText,
+      required this.pageSize,
+      required this.pageKey,
+      required this.pagingController});
 
   @override
-  final String? searchText;
+  final String searchText;
+  @override
+  final int pageSize;
+  @override
+  final int pageKey;
+  @override
+  final PagingController<dynamic, dynamic> pagingController;
 
   @override
   String toString() {
-    return 'SpEvent.search(searchText: $searchText)';
+    return 'SpEvent.search(searchText: $searchText, pageSize: $pageSize, pageKey: $pageKey, pagingController: $pagingController)';
   }
 
   @override
@@ -129,11 +164,17 @@ class _$SearchImpl implements _Search {
         (other.runtimeType == runtimeType &&
             other is _$SearchImpl &&
             (identical(other.searchText, searchText) ||
-                other.searchText == searchText));
+                other.searchText == searchText) &&
+            (identical(other.pageSize, pageSize) ||
+                other.pageSize == pageSize) &&
+            (identical(other.pageKey, pageKey) || other.pageKey == pageKey) &&
+            (identical(other.pagingController, pagingController) ||
+                other.pagingController == pagingController));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, searchText);
+  int get hashCode =>
+      Object.hash(runtimeType, searchText, pageSize, pageKey, pagingController);
 
   @JsonKey(ignore: true)
   @override
@@ -144,33 +185,39 @@ class _$SearchImpl implements _Search {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? searchText) search,
+    required TResult Function(String searchText, int pageSize, int pageKey,
+            PagingController<dynamic, dynamic> pagingController)
+        search,
     required TResult Function(int? min, int? max) filter,
     required TResult Function(OrderType? orderType) orderBy,
   }) {
-    return search(searchText);
+    return search(searchText, pageSize, pageKey, pagingController);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? searchText)? search,
+    TResult? Function(String searchText, int pageSize, int pageKey,
+            PagingController<dynamic, dynamic> pagingController)?
+        search,
     TResult? Function(int? min, int? max)? filter,
     TResult? Function(OrderType? orderType)? orderBy,
   }) {
-    return search?.call(searchText);
+    return search?.call(searchText, pageSize, pageKey, pagingController);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? searchText)? search,
+    TResult Function(String searchText, int pageSize, int pageKey,
+            PagingController<dynamic, dynamic> pagingController)?
+        search,
     TResult Function(int? min, int? max)? filter,
     TResult Function(OrderType? orderType)? orderBy,
     required TResult orElse(),
   }) {
     if (search != null) {
-      return search(searchText);
+      return search(searchText, pageSize, pageKey, pagingController);
     }
     return orElse();
   }
@@ -211,9 +258,17 @@ class _$SearchImpl implements _Search {
 }
 
 abstract class _Search implements SpEvent {
-  const factory _Search({required final String? searchText}) = _$SearchImpl;
+  const factory _Search(
+          {required final String searchText,
+          required final int pageSize,
+          required final int pageKey,
+          required final PagingController<dynamic, dynamic> pagingController}) =
+      _$SearchImpl;
 
-  String? get searchText;
+  String get searchText;
+  int get pageSize;
+  int get pageKey;
+  PagingController<dynamic, dynamic> get pagingController;
   @JsonKey(ignore: true)
   _$$SearchImplCopyWith<_$SearchImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -291,7 +346,9 @@ class _$FilterImpl implements _Filter {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? searchText) search,
+    required TResult Function(String searchText, int pageSize, int pageKey,
+            PagingController<dynamic, dynamic> pagingController)
+        search,
     required TResult Function(int? min, int? max) filter,
     required TResult Function(OrderType? orderType) orderBy,
   }) {
@@ -301,7 +358,9 @@ class _$FilterImpl implements _Filter {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? searchText)? search,
+    TResult? Function(String searchText, int pageSize, int pageKey,
+            PagingController<dynamic, dynamic> pagingController)?
+        search,
     TResult? Function(int? min, int? max)? filter,
     TResult? Function(OrderType? orderType)? orderBy,
   }) {
@@ -311,7 +370,9 @@ class _$FilterImpl implements _Filter {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? searchText)? search,
+    TResult Function(String searchText, int pageSize, int pageKey,
+            PagingController<dynamic, dynamic> pagingController)?
+        search,
     TResult Function(int? min, int? max)? filter,
     TResult Function(OrderType? orderType)? orderBy,
     required TResult orElse(),
@@ -433,7 +494,9 @@ class _$OrderByImpl implements _OrderBy {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? searchText) search,
+    required TResult Function(String searchText, int pageSize, int pageKey,
+            PagingController<dynamic, dynamic> pagingController)
+        search,
     required TResult Function(int? min, int? max) filter,
     required TResult Function(OrderType? orderType) orderBy,
   }) {
@@ -443,7 +506,9 @@ class _$OrderByImpl implements _OrderBy {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? searchText)? search,
+    TResult? Function(String searchText, int pageSize, int pageKey,
+            PagingController<dynamic, dynamic> pagingController)?
+        search,
     TResult? Function(int? min, int? max)? filter,
     TResult? Function(OrderType? orderType)? orderBy,
   }) {
@@ -453,7 +518,9 @@ class _$OrderByImpl implements _OrderBy {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? searchText)? search,
+    TResult Function(String searchText, int pageSize, int pageKey,
+            PagingController<dynamic, dynamic> pagingController)?
+        search,
     TResult Function(int? min, int? max)? filter,
     TResult Function(OrderType? orderType)? orderBy,
     required TResult orElse(),
@@ -514,7 +581,7 @@ mixin _$SpState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<SPProduct> products) loaded,
+    required TResult Function(List<SPGroupedHits> products) loaded,
     required TResult Function() error,
   }) =>
       throw _privateConstructorUsedError;
@@ -522,7 +589,7 @@ mixin _$SpState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<SPProduct> products)? loaded,
+    TResult? Function(List<SPGroupedHits> products)? loaded,
     TResult? Function()? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -530,7 +597,7 @@ mixin _$SpState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<SPProduct> products)? loaded,
+    TResult Function(List<SPGroupedHits> products)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) =>
@@ -619,7 +686,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<SPProduct> products) loaded,
+    required TResult Function(List<SPGroupedHits> products) loaded,
     required TResult Function() error,
   }) {
     return initial();
@@ -630,7 +697,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<SPProduct> products)? loaded,
+    TResult? Function(List<SPGroupedHits> products)? loaded,
     TResult? Function()? error,
   }) {
     return initial?.call();
@@ -641,7 +708,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<SPProduct> products)? loaded,
+    TResult Function(List<SPGroupedHits> products)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -733,7 +800,7 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<SPProduct> products) loaded,
+    required TResult Function(List<SPGroupedHits> products) loaded,
     required TResult Function() error,
   }) {
     return loading();
@@ -744,7 +811,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<SPProduct> products)? loaded,
+    TResult? Function(List<SPGroupedHits> products)? loaded,
     TResult? Function()? error,
   }) {
     return loading?.call();
@@ -755,7 +822,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<SPProduct> products)? loaded,
+    TResult Function(List<SPGroupedHits> products)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -813,7 +880,7 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<SPProduct> products});
+  $Res call({List<SPGroupedHits> products});
 }
 
 /// @nodoc
@@ -833,7 +900,7 @@ class __$$LoadedImplCopyWithImpl<$Res>
       null == products
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
-              as List<SPProduct>,
+              as List<SPGroupedHits>,
     ));
   }
 }
@@ -841,11 +908,11 @@ class __$$LoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadedImpl implements _Loaded {
-  const _$LoadedImpl(final List<SPProduct> products) : _products = products;
+  const _$LoadedImpl(final List<SPGroupedHits> products) : _products = products;
 
-  final List<SPProduct> _products;
+  final List<SPGroupedHits> _products;
   @override
-  List<SPProduct> get products {
+  List<SPGroupedHits> get products {
     if (_products is EqualUnmodifiableListView) return _products;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_products);
@@ -879,7 +946,7 @@ class _$LoadedImpl implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<SPProduct> products) loaded,
+    required TResult Function(List<SPGroupedHits> products) loaded,
     required TResult Function() error,
   }) {
     return loaded(products);
@@ -890,7 +957,7 @@ class _$LoadedImpl implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<SPProduct> products)? loaded,
+    TResult? Function(List<SPGroupedHits> products)? loaded,
     TResult? Function()? error,
   }) {
     return loaded?.call(products);
@@ -901,7 +968,7 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<SPProduct> products)? loaded,
+    TResult Function(List<SPGroupedHits> products)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -950,9 +1017,9 @@ class _$LoadedImpl implements _Loaded {
 }
 
 abstract class _Loaded implements SpState {
-  const factory _Loaded(final List<SPProduct> products) = _$LoadedImpl;
+  const factory _Loaded(final List<SPGroupedHits> products) = _$LoadedImpl;
 
-  List<SPProduct> get products;
+  List<SPGroupedHits> get products;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -998,7 +1065,7 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<SPProduct> products) loaded,
+    required TResult Function(List<SPGroupedHits> products) loaded,
     required TResult Function() error,
   }) {
     return error();
@@ -1009,7 +1076,7 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<SPProduct> products)? loaded,
+    TResult? Function(List<SPGroupedHits> products)? loaded,
     TResult? Function()? error,
   }) {
     return error?.call();
@@ -1020,7 +1087,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<SPProduct> products)? loaded,
+    TResult Function(List<SPGroupedHits> products)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {

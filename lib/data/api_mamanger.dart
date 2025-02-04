@@ -3,9 +3,9 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:scalapay/data/endpoints.dart';
 
 class ApiManager {
-  final _receiveTimeout = const Duration(seconds: 5);
-  final _connectTimeout = const Duration(seconds: 5);
-  final _sendTimeout = const Duration(seconds: 5);
+  final _receiveTimeout = const Duration(seconds: 10);
+  final _connectTimeout = const Duration(seconds: 10);
+  final _sendTimeout = const Duration(seconds: 10);
 
   late Dio _dio;
   ApiManager._internal();

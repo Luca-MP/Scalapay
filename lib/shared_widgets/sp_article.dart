@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:scalapay/sp_colors.dart';
 
 class SPArticle extends StatefulWidget {
-  final Image articleImage;
-  final String title;
-  final String store;
-  final double price;
+  final String? articleImage;
+  final String? title;
+  final String? store;
+  final double? price;
 
   const SPArticle({
     super.key,
@@ -25,12 +25,13 @@ class _SPArticleState extends State<SPArticle> {
     return Column(
       children: [
         Container(
+          padding: const EdgeInsets.all(4),
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(20)),
             color: SPColors.whiteBottomSheet,
           ),
           height: 208,
-          child: Container(child: widget.articleImage),
+          child: Image.network(widget.articleImage ?? "", fit: BoxFit.fitWidth),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
@@ -38,17 +39,20 @@ class _SPArticleState extends State<SPArticle> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.title,
+                widget.title ?? "",
                 style: const TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 14,
                 ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
               Text(
-                widget.store,
+                widget.store ?? "",
                 style: const TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
+                  color: SPColors.merchant,
                 ),
               ),
               const SizedBox(height: 4),
@@ -56,15 +60,15 @@ class _SPArticleState extends State<SPArticle> {
                 "${widget.price}€ or",
                 style: const TextStyle(
                   fontSize: 13,
-                  color: Colors.grey,
+                  color: SPColors.sellingPrice,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               Text(
-                "3 installments of\n€${(widget.price * 100 / 3).round() / 100}",
+                "3 installments of\n€${widget.price?.toStringAsFixed(2)}",
                 style: const TextStyle(
                   fontSize: 15,
-                  color: Colors.blueAccent,
+                  color: SPColors.mainPurple,
                   fontWeight: FontWeight.w600,
                 ),
               ),

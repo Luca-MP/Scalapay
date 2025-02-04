@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:scalapay/bloc/sp_bloc.dart';
+import 'package:scalapay/data/models/sp_grouped_hits/sp_grouped_hits.dart';
+import 'package:scalapay/data/productService.dart';
 import 'package:scalapay/shared_widgets/sp_article.dart';
 import 'package:scalapay/shared_widgets/sp_assets.dart';
 import 'package:scalapay/shared_widgets/sp_filter_bottom_sheet.dart';
@@ -14,12 +17,7 @@ final GetIt getIt = GetIt.instance;
 
 void main() {
   configureDependencies();
-  runApp(
-    BlocProvider(
-      create: (_) => getIt<SpBloc>(),
-      child: const MyApp(),
-    ),
-  );
+  runApp(BlocProvider(create: (_) => getIt<SpBloc>(), child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -45,9 +43,13 @@ class _MyHomePageState extends State<MyHomePage> {
   final FocusNode _focusNode = FocusNode();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController searchController = TextEditingController();
+  final PagingController<int, SPGroupedHits> _pagingController = PagingController(firstPageKey: 1);
+  static const _pageSize = 10;
+
 
   @override
   void initState() {
+    //
     searchController.text = "Nike";
     super.initState();
   }
@@ -61,7 +63,16 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (context, state) {
           state.whenOrNull(
             initial: () {
-              //todo
+              _pagingController.addPageRequestListener(
+                (pageKey) => BlocProvider.of<SpBloc>(context).add(
+                  SpEvent.search(
+                    searchText: searchController.text,
+                    pageSize: _pageSize,
+                    pageKey: pageKey,
+                    pagingController: _pagingController,
+                  ),
+                ),
+              );
             },
           );
           return SafeArea(
@@ -95,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           color: Colors.white,
                           onPressed: () {
                             BlocProvider.of<SpBloc>(context).add(
-                              SpEvent.search(searchText: searchController.text),
+                              SpEvent.search(searchText: searchController.text, pageSize: _pageSize, pageKey: 1, pagingController: _pagingController),
                             );
                           },
                         ),
@@ -169,26 +180,38 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 Expanded(
-                  child: GridView.builder(
-                    shrinkWrap: true,
+                  child: PagedGridView<int, SPGroupedHits>(
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
                       mainAxisExtent: 376,
                     ),
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {},
+                    padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                    shrinkWrap: true,
+                    pagingController: _pagingController,
+                    builderDelegate: PagedChildBuilderDelegate<SPGroupedHits>(
+                      itemBuilder: (context, product, index) => GestureDetector(
+                        onTap: () {print(product.hits.first.document.title);},
                         child: SPArticle(
-                          articleImage: SPAssets.shoe,
-                          title: "Nike - Revolution 6 Next Nature Triple Balck",
-                          store: "Pittarello",
-                          price: 85.00,
+                            articleImage: product.hits.first.document.image,
+                            title: product.hits.first.document.title,
+                            store: product.hits.first.document.merchant,
+                            price: product.hits.first.document.selling_price,
                         ),
-                      );
-                    },
+                      ),
+                      newPageProgressIndicatorBuilder: (_) => SizedBox(height: 1,),
+                      noItemsFoundIndicatorBuilder: (_) => Column(
+                        children: [
+                          SizedBox(height: MediaQuery.of(context).size.width / 2),
+                          const Text("Nessun articolo trovato"),
+                        ],
+                      ),
+                      firstPageErrorIndicatorBuilder: (_) => TextButton(
+                        child: Text("firstPageErrorIndicatorBuilder"),
+                        onPressed: () => _pagingController.refresh(),
+                      ),
+                    ),
                   ),
                 ),
               ],

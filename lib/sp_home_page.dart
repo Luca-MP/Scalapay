@@ -74,8 +74,7 @@ class _SpHomePageState extends State<SpHomePage> {
                     padding: EdgeInsets.only(left: 12, top: 80, bottom: 10),
                     child: Text(
                       "Esplora i prodotti",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w700, fontSize: 26),
+                      style: TextStyle(fontWeight: FontWeight.w700, fontSize: 26),
                     ),
                   ),
                   TextFormField(
@@ -94,7 +93,9 @@ class _SpHomePageState extends State<SpHomePage> {
                             icon: const Icon(Icons.search),
                             color: Colors.white,
                             onPressed: () {
-
+                              _pagingController.itemList?.clear();
+                              _pagingController.appendLastPage([]);
+                              _pagingController.refresh();
                             },
                           ),
                         ),
@@ -138,6 +139,9 @@ class _SpHomePageState extends State<SpHomePage> {
                               applyFilters: (min, max) {
                                 _minController.text = min.toString();
                                 _maxController.text = max.toString();
+                                _pagingController.itemList?.clear();
+                                _pagingController.appendLastPage([]);
+                                _pagingController.refresh();
                               },
                             ),
                           ),
@@ -159,6 +163,9 @@ class _SpHomePageState extends State<SpHomePage> {
                               orderType: _orderType,
                               applyOrderType: (type) {
                                 _orderType = type;
+                                _pagingController.itemList?.clear();
+                                _pagingController.appendLastPage([]);
+                                _pagingController.refresh();
                               },
                             ),
                           ),
@@ -190,28 +197,24 @@ class _SpHomePageState extends State<SpHomePage> {
                             price: product.hits.first.document.selling_price,
                           ),
                         ),
-                        firstPageProgressIndicatorBuilder: (_) {
-                          return Transform.translate(
-                            offset: Offset(0, MediaQuery.of(context).size.width / 4.5),
-                            child: const Center(
-                              child: CircularProgressIndicator(
-                                color: SPColors.mainPurple,
-                                backgroundColor: Colors.white,
-                              ),
+                        firstPageProgressIndicatorBuilder: (_) => Transform.translate(
+                          offset: Offset(0, MediaQuery.of(context).size.width / 4.5),
+                          child: const Center(
+                            child: CircularProgressIndicator(
+                              color: SPColors.mainPurple,
+                              backgroundColor: Colors.white,
                             ),
-                          );
-                        },
-                        newPageProgressIndicatorBuilder: (_) {
-                          return Transform.translate(
-                            offset: Offset(MediaQuery.of(context).size.width / 4.5, 0),
-                            child: const Center(
-                              child: CircularProgressIndicator(
-                                color: SPColors.mainPurple,
-                                backgroundColor: Colors.white,
-                              ),
+                          ),
+                        ),
+                        newPageProgressIndicatorBuilder: (_) => Transform.translate(
+                          offset: Offset(MediaQuery.of(context).size.width / 4.5, 0),
+                          child: const Center(
+                            child: CircularProgressIndicator(
+                              color: SPColors.mainPurple,
+                              backgroundColor: Colors.white,
                             ),
-                          );
-                        },
+                          ),
+                        ),
                         noItemsFoundIndicatorBuilder: (_) => Column(
                           children: [
                             SizedBox(height: MediaQuery.of(context).size.width / 2),

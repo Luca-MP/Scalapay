@@ -20,7 +20,7 @@ class SpBloc extends Bloc<SpEvent, SpState> {
       (event, emit) async {
         await event.when(
           search: (searchText, minPrice, maxPrice, orderType, pageSize, pageKey, pagingController,) async {
-            _fetchPage(searchText, minPrice, maxPrice, convertOrderType(orderType), pageSize, pageKey, pagingController);
+            _fetchPage(searchText, minPrice, maxPrice, _convertOrderType(orderType), pageSize, pageKey, pagingController);
           },
           openLink: (url) async {
             if (!await launchUrl(Uri.parse(url))) {
@@ -55,6 +55,7 @@ class SpBloc extends Bloc<SpEvent, SpState> {
         language: SPConstants.language,
         country: SPConstants.language.toUpperCase(),
       );
+
       // this check prevents multi-refresh errors
       if (pageKey == 1) {
         if (pagingController.itemList != null) {
@@ -77,19 +78,16 @@ class SpBloc extends Bloc<SpEvent, SpState> {
     }
   }
 
-  String convertOrderType(OrderType orderType) {
-    String sorting;
+  String _convertOrderType(OrderType orderType) {
     switch (orderType) {
       case OrderType.asc:
-        sorting = "selling_price:asc";
-        break;
+        return "selling_price:asc";
       case OrderType.desc:
-        sorting = "selling_price:desc";
+        return "selling_price:desc";
       case OrderType.az:
-        sorting = "_text_match:asc";
+        return "_text_match:asc";
       case OrderType.za:
-        sorting = "_text_match:asc";
+        return "_text_match:asc";
     }
-    return sorting;
   }
 }

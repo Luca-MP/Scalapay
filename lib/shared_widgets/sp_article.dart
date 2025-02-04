@@ -66,7 +66,7 @@ class _SPArticleState extends State<SPArticle> {
               ),
               const SizedBox(height: 4),
               Text(
-                "${widget.price}€ or",
+                "${widget.price?.toStringAsFixed(2)}€ or",
                 style: const TextStyle(
                   fontSize: 13,
                   color: SPColors.sellingPrice,
@@ -74,7 +74,7 @@ class _SPArticleState extends State<SPArticle> {
                 ),
               ),
               Text(
-                "3 installments of\n€${widget.price?.toStringAsFixed(2)}",
+                "3 installments of\n€${(widget.price! / 3).toStringAsFixed(2)}",
                 style: const TextStyle(
                   fontSize: 15,
                   color: SPColors.mainPurple,

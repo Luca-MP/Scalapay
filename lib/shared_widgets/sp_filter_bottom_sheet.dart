@@ -3,11 +3,15 @@ import 'package:scalapay/sp_colors.dart';
 
 class SpFilterBottomSheet extends StatefulWidget {
   final BuildContext context;
+  final TextEditingController minController;
+  final TextEditingController maxController;
   final void Function(int min, int max) applyFilters;
 
   const SpFilterBottomSheet({
     super.key,
     required this.context,
+    required this.minController,
+    required this.maxController,
     required this.applyFilters,
   });
 
@@ -18,14 +22,10 @@ class SpFilterBottomSheet extends StatefulWidget {
 class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
   final FocusNode _focusNode = FocusNode();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _minController = TextEditingController();
-  final TextEditingController _maxController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _minController.text = "500";
-    _maxController.text = "2000";
   }
 
   @override
@@ -98,7 +98,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
                                 maxLength: 4,
                                 textInputAction: TextInputAction.next,
                                 keyboardType: TextInputType.number,
-                                controller: _minController,
+                                controller: widget.minController,
                                 onChanged: (value) {
                                   if (value.isEmpty) return;
                                 },
@@ -144,7 +144,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
                                 maxLength: 4,
                                 textInputAction: TextInputAction.done,
                                 keyboardType: TextInputType.number,
-                                controller: _maxController,
+                                controller: widget.maxController,
                                 onChanged: (value) {
                                   if (value.isEmpty) return;
                                 },
@@ -209,8 +209,8 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           widget.applyFilters(
-                            int.tryParse(_minController.value.text) ?? -1,
-                            int.tryParse(_maxController.value.text) ?? -1,
+                            int.tryParse(widget.minController.value.text) ?? -1,
+                            int.tryParse(widget.maxController.value.text) ?? -1,
                           );
                           // added delay to show to the user the selection
                           Future.delayed(
@@ -241,7 +241,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
       return 'Enter a valid integer';
     }
 
-    if (intValue >= int.parse(_maxController.text)) {
+    if (intValue >= int.parse(widget.maxController.text)) {
       return 'Lower than maximum';
     }
 
@@ -258,7 +258,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
       return 'Enter a valid integer';
     }
 
-    if (intValue <= int.parse(_minController.text)) {
+    if (intValue <= int.parse(widget.minController.text)) {
       return 'Greater than minimum';
     }
 

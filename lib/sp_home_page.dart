@@ -20,6 +20,9 @@ class _SpHomePageState extends State<SpHomePage> {
   final FocusNode _focusNode = FocusNode();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _searchController = TextEditingController();
+  final TextEditingController _minController = TextEditingController();
+  final TextEditingController _maxController = TextEditingController();
+  late OrderType _orderType;
   final PagingController<int, SPGroupedHits> _pagingController =
       PagingController(firstPageKey: 1);
   static const _pageSize = 10;
@@ -27,6 +30,9 @@ class _SpHomePageState extends State<SpHomePage> {
   @override
   void initState() {
     _searchController.text = "Nike";
+    _minController.text = "500";
+    _maxController.text = "2000";
+    _orderType = OrderType.asc;
     super.initState();
   }
 
@@ -42,11 +48,14 @@ class _SpHomePageState extends State<SpHomePage> {
         body: BlocBuilder<SpBloc, SpState>(
           builder: (context, state) {
             state.whenOrNull(
-              initial: () {
+              searching: () {
                 _pagingController.addPageRequestListener(
                   (pageKey) => BlocProvider.of<SpBloc>(context).add(
                     SpEvent.search(
                       searchText: _searchController.text,
+                      minPrice: double.parse(_minController.text),
+                      maxPrice: double.parse(_maxController.text),
+                      orderType: _orderType,
                       pageSize: _pageSize,
                       pageKey: pageKey,
                       pagingController: _pagingController,
@@ -85,14 +94,7 @@ class _SpHomePageState extends State<SpHomePage> {
                             icon: const Icon(Icons.search),
                             color: Colors.white,
                             onPressed: () {
-                              BlocProvider.of<SpBloc>(context).add(
-                                SpEvent.search(
-                                  searchText: _searchController.text,
-                                  pageSize: _pageSize,
-                                  pageKey: 1,
-                                  pagingController: _pagingController,
-                                ),
-                              );
+
                             },
                           ),
                         ),
@@ -131,10 +133,11 @@ class _SpHomePageState extends State<SpHomePage> {
                             context: context,
                             builder: (context) => SpFilterBottomSheet(
                               context: context,
+                              minController: _minController,
+                              maxController: _maxController,
                               applyFilters: (min, max) {
-                                BlocProvider.of<SpBloc>(context).add(
-                                  SpEvent.filter(min: min, max: max),
-                                );
+                                _minController.text = min.toString();
+                                _maxController.text = max.toString();
                               },
                             ),
                           ),
@@ -153,10 +156,9 @@ class _SpHomePageState extends State<SpHomePage> {
                             context: context,
                             builder: (context) => SpOrderBottomSheet(
                               context: context,
+                              orderType: _orderType,
                               applyOrderType: (type) {
-                                BlocProvider.of<SpBloc>(context).add(
-                                  SpEvent.orderBy(orderType: type),
-                                );
+                                _orderType = type;
                               },
                             ),
                           ),
@@ -172,17 +174,14 @@ class _SpHomePageState extends State<SpHomePage> {
                         mainAxisSpacing: 10,
                         mainAxisExtent: 376,
                       ),
-                      padding: const EdgeInsets.only(
-                          left: 16, right: 16, bottom: 16),
+                      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
                       shrinkWrap: true,
                       pagingController: _pagingController,
                       builderDelegate: PagedChildBuilderDelegate<SPGroupedHits>(
                         animateTransitions: true,
-                        itemBuilder: (context, product, index) =>
-                            GestureDetector(
+                        itemBuilder: (context, product, index) => GestureDetector(
                           onTap: () => BlocProvider.of<SpBloc>(context).add(
-                            SpEvent.openLink(
-                                url: product.hits.first.document.url!),
+                            SpEvent.openLink(url: product.hits.first.document.url!),
                           ),
                           child: SPArticle(
                             articleImage: product.hits.first.document.image,
@@ -221,22 +220,26 @@ class _SpHomePageState extends State<SpHomePage> {
                         ),
                         newPageErrorIndicatorBuilder: (_) => Transform.translate(
                           offset: Offset(MediaQuery.of(context).size.width / 4.5, 0),
+                          child: Center(
+                            child: TextButton.icon(
+                              icon: const Icon(Icons.refresh_rounded),
+                              label: const Text("Riprova"),
+                              style: ButtonStyle(
+                                foregroundColor: WidgetStateProperty.all(SPColors.mainPurple),
+                              ),
+                              onPressed: () => _pagingController.retryLastFailedRequest(),
+                            ),
+                          ),
+                        ),
+                        firstPageErrorIndicatorBuilder: (_) => Center(
                           child: TextButton.icon(
                             icon: const Icon(Icons.refresh_rounded),
                             label: const Text("Riprova"),
                             style: ButtonStyle(
                               foregroundColor: WidgetStateProperty.all(SPColors.mainPurple),
                             ),
-                            onPressed: () => _pagingController.retryLastFailedRequest(),
+                            onPressed: () => _pagingController.refresh(),
                           ),
-                        ),
-                        firstPageErrorIndicatorBuilder: (_) => TextButton.icon(
-                          icon: const Icon(Icons.refresh_rounded),
-                          label: const Text("Riprova"),
-                          style: ButtonStyle(
-                            foregroundColor: WidgetStateProperty.all(SPColors.mainPurple),
-                          ),
-                          onPressed: () => _pagingController.refresh(),
                         ),
                       ),
                     ),

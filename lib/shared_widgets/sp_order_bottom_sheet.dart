@@ -3,11 +3,13 @@ import 'package:scalapay/sp_colors.dart';
 
 class SpOrderBottomSheet extends StatefulWidget {
   final BuildContext context;
-  final void Function(OrderType?) applyOrderType;
+  OrderType orderType;
+  final void Function(OrderType) applyOrderType;
 
-  const SpOrderBottomSheet({
+  SpOrderBottomSheet({
     super.key,
     required this.context,
+    required this.orderType,
     required this.applyOrderType,
   });
 
@@ -16,8 +18,6 @@ class SpOrderBottomSheet extends StatefulWidget {
 }
 
 class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
-  OrderType _type = OrderType.asc;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -74,7 +74,7 @@ class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
                     title: const Text("Prezzo crescente"),
                     onChanged: (OrderType? value) => _orderType(context, value),
                     value: OrderType.asc,
-                    groupValue: _type,
+                    groupValue: widget.orderType,
                     fillColor: WidgetStateProperty.all(SPColors.mainPurple),
                   ),
                   const Divider(indent: 16, endIndent: 16),
@@ -82,7 +82,7 @@ class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
                     title: const Text("Prezzo decrescente"),
                     onChanged: (OrderType? value) => _orderType(context, value),
                     value: OrderType.desc,
-                    groupValue: _type,
+                    groupValue: widget.orderType,
                     fillColor: WidgetStateProperty.all(SPColors.mainPurple),
                   ),
                   const Divider(indent: 16, endIndent: 16),
@@ -90,7 +90,7 @@ class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
                     title: const Text("Nome A - Z"),
                     onChanged: (OrderType? value) => _orderType(context, value),
                     value: OrderType.az,
-                    groupValue: _type,
+                    groupValue: widget.orderType,
                     fillColor: WidgetStateProperty.all(SPColors.mainPurple),
                   ),
                   const Divider(indent: 16, endIndent: 16),
@@ -98,7 +98,7 @@ class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
                     title: const Text("Nome Z - A"),
                     onChanged: (OrderType? value) => _orderType(context, value),
                     value: OrderType.za,
-                    groupValue: _type,
+                    groupValue: widget.orderType,
                     fillColor: WidgetStateProperty.all(SPColors.mainPurple),
                   ),
                 ],
@@ -111,8 +111,8 @@ class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
   }
 
   _orderType(BuildContext context, OrderType? orderType) {
-    setState(() => _type = orderType!);
-    widget.applyOrderType(_type);
+    setState(() => widget.orderType = orderType!);
+    widget.applyOrderType(widget.orderType);
 
     // added delay to show to the user the selection
     Future.delayed(

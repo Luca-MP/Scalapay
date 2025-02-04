@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:scalapay/data/models/sp_grouped_hits/sp_grouped_hits.dart';
 import 'package:scalapay/data/productService.dart';
+import 'package:scalapay/shared_widgets/constants.dart';
 import 'package:scalapay/shared_widgets/sp_order_bottom_sheet.dart';
 import 'package:injectable/injectable.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -15,20 +15,12 @@ part 'sp_state.dart';
 class SpBloc extends Bloc<SpEvent, SpState> {
   final ProductService _productService;
 
-  SpBloc(this._productService) : super(const SpState.initial()) {
+  SpBloc(this._productService) : super(const SpState.searching()) {
     on<SpEvent>(
       (event, emit) async {
         await event.when(
-          search: (searchText, pageSize, pageKey, pagingController) async {
-            emit(const SpState.loading());
-            _fetchPage(searchText, pageSize, pageKey, pagingController);
-            emit (SpState.loaded([]));
-          },
-          filter: (min, max) async {
-            print("Price filter: form $min to $max");
-          },
-          orderBy: (orderType) async {
-            print("Order by: $orderType");
+          search: (searchText, minPrice, maxPrice, orderType, pageSize, pageKey, pagingController,) async {
+            _fetchPage(searchText, minPrice, maxPrice, convertOrderType(orderType), pageSize, pageKey, pagingController);
           },
           openLink: (url) async {
             if (!await launchUrl(Uri.parse(url))) {
@@ -42,6 +34,9 @@ class SpBloc extends Bloc<SpEvent, SpState> {
 
   Future<void> _fetchPage(
     String searchText,
+    double minPrice,
+    double maxPrice,
+    String sortBy,
     int pageSize,
     int pageKey,
     PagingController pagingController,
@@ -52,13 +47,13 @@ class SpBloc extends Bloc<SpEvent, SpState> {
         per_page: pageSize,
         page: pageKey,
         filter_by: "",
-        sort_by: "selling_price%3Aasc",
-        minPrice: 13.0,
-        maxPrice: 278.0,
-        partnerId: "scalapayappit",
-        source: "trovaprezzi",
-        language: "it",
-        country: "IT",
+        sort_by: sortBy,
+        minPrice: minPrice,
+        maxPrice: maxPrice,
+        partnerId: SPConstants.partnerId,
+        source: SPConstants.source,
+        language: SPConstants.language,
+        country: SPConstants.language.toUpperCase(),
       );
       // this check prevents multi-refresh errors
       if (pageKey == 1) {
@@ -80,5 +75,21 @@ class SpBloc extends Bloc<SpEvent, SpState> {
     } catch (error) {
       pagingController.error = error;
     }
+  }
+
+  String convertOrderType(OrderType orderType) {
+    String sorting;
+    switch (orderType) {
+      case OrderType.asc:
+        sorting = "selling_price:asc";
+        break;
+      case OrderType.desc:
+        sorting = "selling_price:desc";
+      case OrderType.az:
+        sorting = "_text_match:asc";
+      case OrderType.za:
+        sorting = "_text_match:asc";
+    }
+    return sorting;
   }
 }

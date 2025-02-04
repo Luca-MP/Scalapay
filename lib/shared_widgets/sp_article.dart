@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:scalapay/sp_colors.dart';
 
@@ -31,7 +32,15 @@ class _SPArticleState extends State<SPArticle> {
             color: SPColors.whiteBottomSheet,
           ),
           height: 208,
-          child: Image.network(widget.articleImage ?? "", fit: BoxFit.fitWidth),
+          child: CachedNetworkImage(
+            imageUrl: widget.articleImage ?? "",
+            fit: BoxFit.fitWidth,
+            errorWidget: (context, url, error) => const Center(
+              child: Icon(
+                Icons.error,
+              ),
+            ),
+          ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),

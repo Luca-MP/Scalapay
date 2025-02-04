@@ -31,13 +31,14 @@ Benvenuto in **Scalapay Test**, un'app Flutter moderna e intuitiva che consente 
 - **Nome app**: Il nome dell'app è stata sostituito sia su Android tramite l'AndroidManifest.xml mentre per iOS all'interno dell'Runner.xcodeproj.
 
 ### **Librerie Utilizzate**
-| Libreria                           | Versione | Descrizione                            |
-|------------------------------------|----------|----------------------------------------|
-| **`dio`**                          | 5.7.0    | HTTP client per fetchare i prodotti.   |
-| **`get_it`**                       | 8.1.4    | Supporto alla DI.                |
-| **`flutter_bloc`**                 | 8.1.5    | Gestione stato scalabile.              |
-| **`infinite_scroll_pagination`**   | 4.0.0    | Paginazione dei risultati di ricerca.  |
-| **`url_launcher`**                 | 6.3.1    | Apertura link.                         |
+| Libreria                         | Versione | Descrizione                           |
+|----------------------------------|----------|---------------------------------------|
+| **`dio`**                        | 5.7.0    | HTTP client per fetchare i prodotti.  |
+| **`get_it`**                     | 8.1.4    | Supporto alla DI.                     |
+| **`flutter_bloc`**               | 8.1.5    | Gestione stato scalabile.             |
+| **`infinite_scroll_pagination`** | 4.0.0    | Paginazione dei risultati di ricerca. |
+| **`url_launcher`**               | 6.3.1    | Apertura link.                        |
+| **`cached_network_image`**       | 3.4.1    | Gestione della cache per le immagini  |
 
 
 ## 🏁 **Avvio del Progetto**

@@ -23,8 +23,7 @@ class _SpHomePageState extends State<SpHomePage> {
   final TextEditingController _minController = TextEditingController();
   final TextEditingController _maxController = TextEditingController();
   late OrderType _orderType;
-  final PagingController<int, SPGroupedHits> _pagingController =
-      PagingController(firstPageKey: 1);
+  final PagingController<int, SPGroupedHits> _pagingController = PagingController(firstPageKey: 1);
   static const _pageSize = 10;
 
   @override

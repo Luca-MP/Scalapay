@@ -92,7 +92,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              padding: EdgeInsets.symmetric(horizontal: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 8),
                               width: 150,
                               child: TextFormField(
                                 maxLength: 5,
@@ -137,7 +137,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
                             ),
                             Container(height: 1, width: 16, color: Colors.grey),
                             Container(
-                              padding: EdgeInsets.symmetric(horizontal: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 8),
                               width: 150,
                               child: TextFormField(
                                 focusNode: _focusNode,

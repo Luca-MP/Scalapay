@@ -41,7 +41,11 @@ class _SpHomePageState extends State<SpHomePage> {
     return RefreshIndicator(
       color: SPColors.mainPurple,
       backgroundColor: Colors.white,
-      onRefresh: () async => _pagingController.refresh(),
+      onRefresh: () async {
+        _pagingController.itemList?.clear();
+        _pagingController.appendLastPage([]);
+        _pagingController.refresh();
+      },
       child: Scaffold(
         key: _formKey,
         backgroundColor: Colors.white,
@@ -80,7 +84,13 @@ class _SpHomePageState extends State<SpHomePage> {
                   TextFormField(
                     focusNode: _focusNode,
                     controller: _searchController,
-                    onChanged: (value) {},
+                    textInputAction: TextInputAction.search,
+                    onFieldSubmitted: (_) {
+                      _focusNode.unfocus();
+                      _pagingController.itemList?.clear();
+                      _pagingController.appendLastPage([]);
+                      _pagingController.refresh();
+                    },
                     decoration: InputDecoration(
                       prefix: const SizedBox(width: 8),
                       suffixIcon: Padding(
@@ -93,6 +103,7 @@ class _SpHomePageState extends State<SpHomePage> {
                             icon: const Icon(Icons.search),
                             color: Colors.white,
                             onPressed: () {
+                              _focusNode.unfocus();
                               _pagingController.itemList?.clear();
                               _pagingController.appendLastPage([]);
                               _pagingController.refresh();

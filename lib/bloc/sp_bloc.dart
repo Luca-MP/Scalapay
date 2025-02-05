@@ -20,7 +20,7 @@ class SpBloc extends Bloc<SpEvent, SpState> {
       (event, emit) async {
         await event.when(
           search: (searchText, minPrice, maxPrice, orderType, pageSize, pageKey, pagingController,) async {
-            _fetchPage(searchText, minPrice, maxPrice, _convertOrderType(orderType), pageSize, pageKey, pagingController);
+            await _fetchPage(searchText, minPrice, maxPrice, _convertOrderType(orderType), pageSize, pageKey, pagingController);
           },
           openLink: (url) async {
             if (!await launchUrl(Uri.parse(url))) {

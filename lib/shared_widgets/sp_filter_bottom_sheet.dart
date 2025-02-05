@@ -95,7 +95,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
                               padding: EdgeInsets.symmetric(horizontal: 8),
                               width: 150,
                               child: TextFormField(
-                                maxLength: 4,
+                                maxLength: 5,
                                 textInputAction: TextInputAction.next,
                                 keyboardType: TextInputType.number,
                                 controller: widget.minController,
@@ -141,7 +141,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
                               width: 150,
                               child: TextFormField(
                                 focusNode: _focusNode,
-                                maxLength: 4,
+                                maxLength: 5,
                                 textInputAction: TextInputAction.done,
                                 keyboardType: TextInputType.number,
                                 controller: widget.maxController,
@@ -195,10 +195,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
                         backgroundColor: WidgetStateProperty.all(Colors.transparent),
                         foregroundColor: WidgetStateProperty.all(SPColors.mainPurple),
                       ),
-                      onPressed: () {
-                        widget.applyFilters(-1, -1);
-                        Navigator.pop(context);
-                      },
+                      onPressed: () => Navigator.pop(context),
                       child: Text("Cancella tutto", style: TextStyle(letterSpacing: 1.25),),
                     ),
                     SizedBox(width: MediaQuery.of(context).size.width / 10),

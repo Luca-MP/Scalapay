@@ -49,6 +49,14 @@ Benvenuto in **Scalapay Test**, un'app Flutter moderna e intuitiva che consente 
     ```
 
 
+## 🤖 Esecuzione dei test
+Avvia tutti i gruppi di test:
+
+```bash
+flutter test
+```
+
+
 ## 👨🏻‍💻 Autore
 
 Made with ❤️ by Luca Michael Pezzotta.

@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:scalapay/bloc/sp_bloc.dart';
-import 'package:scalapay/data/models/hits/sp_hits.dart';
+import 'package:scalapay/data/models/sp_hits/sp_hits.dart';
 import 'package:scalapay/data/models/sp_grouped_hits/sp_grouped_hits.dart';
 import 'package:scalapay/data/models/sp_product/sp_product.dart';
 import 'package:scalapay/shared_widgets/sp_article.dart';
@@ -15,7 +15,7 @@ class MockProductService extends Mock implements ProductService {}
 
 void main() {
   group(
-    "Tests InfiniteScrollPagination", () {
+    "tests infinite scroll pagination", () {
       testWidgets(
         'Displays initial data correctly', (WidgetTester tester) async {
           final pagingController = PagingController<int, SPGroupedHits>(firstPageKey: 1);

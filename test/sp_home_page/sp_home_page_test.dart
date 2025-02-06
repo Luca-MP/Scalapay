@@ -1291,25 +1291,24 @@ void main() {
           ),
         ]
       );
-      print(find.byType(Text));
 
       await tester.pumpWidget(await spHomePage(pagingController));
 
       // Load the first page
       pagingController.appendPage(mockProductService.fetchData('Nike', 100, 500, OrderType.asc, 10, 1, pagingController), 2);
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       // Ensure first items are loaded
       expect(find.text('Nike Sneakers Donna Nike Cortez Leather Bianco Rosso'), findsOneWidget);
       expect(find.text('Nike Wmns Air Force 1 \'07, Scarpe da Basket Donna, White White Black, 36 EU'), findsOneWidget);
 
       // Scroll to trigger pagination
-      await tester.drag(find.byType(MaterialApp), const Offset(0, -600));
-      await tester.pumpAndSettle();
+      await tester.drag(find.byType(MaterialApp), const Offset(0, -60000));
+      await tester.pump();
 
       // Load next page
       pagingController.appendPage(mockProductService.fetchData('Nike', 100, 500, OrderType.asc, 10, 2, pagingController), 3);
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       // Verify new items loaded
       expect(find.text('Nike Pantalone Donna Nike Sportswear Tech Fleece Bianco'), findsOneWidget);
@@ -1656,9 +1655,9 @@ void main() {
       // Verify initial items
       expect(find.text('Nike Sneakers Donna Nike Cortez Leather Bianco Rosso'), findsOneWidget);
 
-      // Trigger refresh
-      await tester.drag(find.byType(GridView), const Offset(0, 100));
-      await tester.pump();
+      // Trigger refresh and waiting to load data again
+      await tester.drag(find.byType(MaterialApp), const Offset(0, 300));
+      await tester.pumpAndSettle(const Duration(seconds: 2));
 
       // Refresh data
       pagingController.refresh();

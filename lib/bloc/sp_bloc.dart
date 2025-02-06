@@ -97,13 +97,13 @@ class SpBloc extends Bloc<SpEvent, SpState> {
   String _convertOrderType(OrderType orderType) {
     switch (orderType) {
       case OrderType.asc:
-        return "selling_price:asc";
+        return SPConstants.sellingPriceAsc;
       case OrderType.desc:
-        return "selling_price:desc";
+        return SPConstants.sellingPriceDesc;
       case OrderType.az:
-        return "_text_match:asc";
+        return SPConstants.textMatchAsc;
       case OrderType.za:
-        return "_text_match:asc";
+        return SPConstants.textMatchDesc;
     }
   }
 }

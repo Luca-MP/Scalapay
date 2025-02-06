@@ -1,0 +1,17 @@
+{
+  "exploreProducts" : "Esplora i prodotti",
+  "searchProducts": "Cerca prodotti",
+  "filters": "Filtri",
+  "order": "Ordina",
+  "noProducts": "Nessun prodotto trovato",
+  "retry": "Riprova",
+  "priceRange": "Fascia di prezzo",
+  "min": "Minimo",
+  "max": "Massimo",
+  "cancel": "Cancella tutto",
+  "showResults": "Mostra risultati",
+  "lowHigh": "Prezzo crescente",
+  "highLow": "Prezzo decrescente",
+  "aToZ": "Nome A - Z",
+  "zToA": "Nome Z - A"
+}

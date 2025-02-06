@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scalapay/sp_colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SpFilterBottomSheet extends StatefulWidget {
   final BuildContext context;
@@ -64,9 +65,9 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
                 onPressed: () => Navigator.pop(context),
               ),
             ),
-            const Text(
-              "Filtra",
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.filters,
+              style: const TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 16,
               ),
@@ -85,7 +86,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Fascia di prezzo"),
+                      Text(AppLocalizations.of(context)!.priceRange),
                       Form(
                         key: _formKey,
                         child: Row(
@@ -106,7 +107,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
                                 decoration: InputDecoration(
                                   errorStyle: TextStyle(fontSize: 0),
                                   counterText: "",
-                                  labelText: "Minimo",
+                                  labelText: AppLocalizations.of(context)!.min,
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8),
                                     borderSide: const BorderSide(
@@ -152,7 +153,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
                                 decoration: InputDecoration(
                                   errorStyle: const TextStyle(fontSize: 0),
                                   counterText: "",
-                                  labelText: "Massimo",
+                                  labelText: AppLocalizations.of(context)!.max,
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8),
                                     borderSide: const BorderSide(
@@ -196,7 +197,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
                         foregroundColor: WidgetStateProperty.all(SPColors.mainPurple),
                       ),
                       onPressed: () => Navigator.pop(context),
-                      child: Text("Cancella tutto", style: TextStyle(letterSpacing: 1.25),),
+                      child: Text(AppLocalizations.of(context)!.cancel, style: TextStyle(letterSpacing: 1.25),),
                     ),
                     SizedBox(width: MediaQuery.of(context).size.width / 10),
                     FilledButton(
@@ -216,7 +217,7 @@ class _SpFilterBottomSheetState extends State<SpFilterBottomSheet> {
                           );
                         }
                       },
-                      child: Text("Mostra risultati", style: TextStyle(letterSpacing: 1.25),),
+                      child: Text(AppLocalizations.of(context)!.showResults, style: TextStyle(letterSpacing: 1.25),),
                     ),
                   ],
                 ),

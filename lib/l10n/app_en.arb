@@ -1,0 +1,17 @@
+{
+  "exploreProducts" : "Explore products",
+  "searchProducts": "Search products",
+  "filters": "Filters",
+  "order": "Order",
+  "noProducts": "No products found",
+  "retry": "Retry",
+  "priceRange": "Price range",
+  "min": "Minimum",
+  "max": "Maximum",
+  "cancel": "Cancel all",
+  "showResults": "Show results",
+  "lowHigh": "Low to high price",
+  "highLow": "High to low prica",
+  "aToZ": "A - Z name",
+  "zToA": "Z - A name"
+}

@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:scalapay/data/api_mamanger.dart';
 import 'package:scalapay/data/endpoints.dart';
 import 'package:scalapay/data/models/sp_grouped_hits/sp_grouped_hits.dart';
+import 'package:scalapay/shared_widgets/constants.dart';
 
 @injectable
 class ProductService {
@@ -22,24 +23,24 @@ class ProductService {
     required String country,
   }) async {
     Map<String, dynamic> params = {
-      "q": query,
-      "per_page": per_page,
-      "page": page,
-      "filter_by": filter_by,
-      "sort_by": sort_by,
-      "minPrice": minPrice,
-      "maxPrice": maxPrice,
-      "partnerId": partnerId,
-      "source": source,
-      "language": language,
-      "country": country,
+      SPConstants.qParam: query,
+      SPConstants.perPageParam: per_page,
+      SPConstants.pageParam: page,
+      SPConstants.filterByParam: filter_by,
+      SPConstants.sortByParam: sort_by,
+      SPConstants.minPriceParam: minPrice,
+      SPConstants.maxPriceParam: maxPrice,
+      SPConstants.partnerIdParam: partnerId,
+      SPConstants.sourceParam: source,
+      SPConstants.languageParam: language,
+      SPConstants.countryParam: country,
     };
 
     final response = await dio.get(
       Endpoints.search,
       queryParameters: params,
     );
-    List<dynamic> groupedHitsList = response.data["grouped_hits"];
+    List<dynamic> groupedHitsList = response.data[SPConstants.groupedHits];
     List<SPGroupedHits?> parsedList = groupedHitsList.map(
             (value) => SPGroupedHits.fromJson(value)
     ).toList();

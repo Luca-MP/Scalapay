@@ -8,6 +8,7 @@ import 'package:scalapay/shared_widgets/sp_assets.dart';
 import 'package:scalapay/shared_widgets/sp_filter_bottom_sheet.dart';
 import 'package:scalapay/shared_widgets/sp_order_bottom_sheet.dart';
 import 'package:scalapay/sp_colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SpHomePage extends StatefulWidget {
   const SpHomePage({super.key});
@@ -73,11 +74,11 @@ class _SpHomePageState extends State<SpHomePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 12, top: 80, bottom: 10),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 12, top: 80, bottom: 10),
                     child: Text(
-                      "Esplora i prodotti",
-                      style: TextStyle(fontWeight: FontWeight.w700, fontSize: 26),
+                      AppLocalizations.of(context)!.exploreProducts,
+                      style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 26),
                     ),
                   ),
                   TextFormField(
@@ -110,7 +111,7 @@ class _SpHomePageState extends State<SpHomePage> {
                           ),
                         ),
                       ),
-                      hintText: "Cerca prodotti",
+                      hintText: AppLocalizations.of(context)!.searchProducts,
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(40),
                         borderSide: const BorderSide(color: Colors.grey),
@@ -137,7 +138,7 @@ class _SpHomePageState extends State<SpHomePage> {
                             borderRadius: BorderRadius.circular(24),
                           ),
                           backgroundColor: SPColors.whiteChip,
-                          label: const Text("Filtri"),
+                          label: Text(AppLocalizations.of(context)!.filters),
                           avatar: SPAssets.filter,
                           onSelected: (bool value) => showModalBottomSheet(
                             isScrollControlled: true,
@@ -163,7 +164,7 @@ class _SpHomePageState extends State<SpHomePage> {
                             borderRadius: BorderRadius.circular(24),
                           ),
                           backgroundColor: SPColors.whiteChip,
-                          label: const Text("Ordina"),
+                          label: Text(AppLocalizations.of(context)!.order),
                           avatar: SPAssets.order,
                           onSelected: (_) => showModalBottomSheet(
                             isScrollControlled: true,
@@ -228,7 +229,7 @@ class _SpHomePageState extends State<SpHomePage> {
                         noItemsFoundIndicatorBuilder: (_) => Column(
                           children: [
                             SizedBox(height: MediaQuery.of(context).size.width / 2),
-                            const Text("Nessun articolo trovato"),
+                            Text(AppLocalizations.of(context)!.noProducts),
                           ],
                         ),
                         newPageErrorIndicatorBuilder: (_) => Transform.translate(
@@ -236,7 +237,7 @@ class _SpHomePageState extends State<SpHomePage> {
                           child: Center(
                             child: TextButton.icon(
                               icon: const Icon(Icons.refresh_rounded),
-                              label: const Text("Riprova"),
+                              label: Text(AppLocalizations.of(context)!.retry),
                               style: ButtonStyle(
                                 foregroundColor: WidgetStateProperty.all(SPColors.mainPurple),
                               ),
@@ -247,7 +248,7 @@ class _SpHomePageState extends State<SpHomePage> {
                         firstPageErrorIndicatorBuilder: (_) => Center(
                           child: TextButton.icon(
                             icon: const Icon(Icons.refresh_rounded),
-                            label: const Text("Riprova"),
+                            label: Text(AppLocalizations.of(context)!.retry),
                             style: ButtonStyle(
                               foregroundColor: WidgetStateProperty.all(SPColors.mainPurple),
                             ),

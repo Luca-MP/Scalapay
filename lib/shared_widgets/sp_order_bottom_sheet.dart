@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scalapay/sp_colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SpOrderBottomSheet extends StatefulWidget {
   final BuildContext context;
@@ -53,9 +54,9 @@ class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
                 onPressed: () => Navigator.pop(context),
               ),
             ),
-            const Text(
-              "Ordina",
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.order,
+              style: const TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 16,
               ),
@@ -71,7 +72,7 @@ class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
               child: Column(
                 children: [
                   RadioListTile(
-                    title: const Text("Prezzo crescente"),
+                    title: Text(AppLocalizations.of(context)!.lowHigh),
                     onChanged: (OrderType? value) => _orderType(context, value),
                     value: OrderType.asc,
                     groupValue: widget.orderType,
@@ -79,7 +80,7 @@ class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
                   ),
                   const Divider(indent: 16, endIndent: 16),
                   RadioListTile(
-                    title: const Text("Prezzo decrescente"),
+                    title: Text(AppLocalizations.of(context)!.highLow),
                     onChanged: (OrderType? value) => _orderType(context, value),
                     value: OrderType.desc,
                     groupValue: widget.orderType,
@@ -87,7 +88,7 @@ class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
                   ),
                   const Divider(indent: 16, endIndent: 16),
                   RadioListTile(
-                    title: const Text("Nome A - Z"),
+                    title: Text(AppLocalizations.of(context)!.aToZ),
                     onChanged: (OrderType? value) => _orderType(context, value),
                     value: OrderType.az,
                     groupValue: widget.orderType,
@@ -95,7 +96,7 @@ class _SpOrderBottomSheetState extends State<SpOrderBottomSheet> {
                   ),
                   const Divider(indent: 16, endIndent: 16),
                   RadioListTile(
-                    title: const Text("Nome Z - A"),
+                    title: Text(AppLocalizations.of(context)!.zToA),
                     onChanged: (OrderType? value) => _orderType(context, value),
                     value: OrderType.za,
                     groupValue: widget.orderType,

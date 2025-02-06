@@ -22,13 +22,13 @@ void main() {
           final mockProductService = MockProductService();
 
           // Mock data response
-          when(() => mockProductService.fetchData('Nike', 100, 500, OrderType.asc, 10, 1, pagingController)).thenAnswer((_) => ProductService().page1);
+          when(() => mockProductService.fetchData('Nike', 100.0, 500.0, OrderType.asc, 10, 1, pagingController)).thenAnswer((_) => ProductService().page1);
 
           // Pump the widget
           await tester.pumpWidget(await SPHomePage(pagingController));
 
           // Simulate data loading
-          pagingController.appendPage(mockProductService.fetchData('Nike', 100, 500, OrderType.asc, 10, 1, pagingController), 2);
+          pagingController.appendPage(mockProductService.fetchData('Nike', 100.0, 500.0, OrderType.asc, 10, 1, pagingController), 2);
           await tester.pump();
 
           // Verify the first item appears
@@ -42,13 +42,13 @@ void main() {
           final pagingController = PagingController<int, SPGroupedHits>(firstPageKey: 1);
           final mockProductService = MockProductService();
 
-          when(() => mockProductService.fetchData('Nike', 100, 500, OrderType.asc, 10, 1, pagingController)).thenAnswer((_) => ProductService().page1);
-          when(() => mockProductService.fetchData('Nike', 100, 500, OrderType.asc, 10, 2, pagingController)).thenAnswer((_) => ProductService().page2);
+          when(() => mockProductService.fetchData('Nike', 100.0, 500.0, OrderType.asc, 10, 1, pagingController)).thenAnswer((_) => ProductService().page1);
+          when(() => mockProductService.fetchData('Nike', 100.0, 500.0, OrderType.asc, 10, 2, pagingController)).thenAnswer((_) => ProductService().page2);
 
           await tester.pumpWidget(await SPHomePage(pagingController));
 
           // Load the first page
-          pagingController.appendPage(mockProductService.fetchData('Nike', 100, 500, OrderType.asc, 10, 1, pagingController), 2);
+          pagingController.appendPage(mockProductService.fetchData('Nike', 100.0, 500.0, OrderType.asc, 10, 1, pagingController), 2);
           await tester.pump();
 
           // Ensure first items are loaded
@@ -60,7 +60,7 @@ void main() {
           await tester.pump();
 
           // Load next page
-          pagingController.appendPage(mockProductService.fetchData('Nike', 100, 500, OrderType.asc, 10, 2, pagingController), 3);
+          pagingController.appendPage(mockProductService.fetchData('Nike', 100.0, 500.0, OrderType.asc, 10, 2, pagingController), 3);
           await tester.pump();
 
           // Verify new items loaded
@@ -74,7 +74,7 @@ void main() {
           final pagingController = PagingController<int, SPGroupedHits>(firstPageKey: 1);
           final mockProductService = MockProductService();
 
-          when(() => mockProductService.fetchData('Nike', 100, 500, OrderType.asc, 10, 1, pagingController)).thenThrow(Exception('Failed to load'));
+          when(() => mockProductService.fetchData('Nike', 100.0, 500.0, OrderType.asc, 10, 1, pagingController)).thenThrow(Exception('Failed to load'));
 
           await tester.pumpWidget(await SPHomePage(pagingController));
 
@@ -92,12 +92,12 @@ void main() {
           final pagingController = PagingController<int, SPGroupedHits>(firstPageKey: 1);
           final mockProductService = MockProductService();
 
-          when(() => mockProductService.fetchData('Nike', 100, 500, OrderType.asc, 10, 1, pagingController)).thenAnswer((_) => ProductService().page1);
+          when(() => mockProductService.fetchData('Nike', 100.0, 500.0, OrderType.asc, 10, 1, pagingController)).thenAnswer((_) => ProductService().page1);
 
           await tester.pumpWidget(await SPHomePage(pagingController));
 
           // Load initial data
-          pagingController.appendPage(mockProductService.fetchData('Nike', 100, 500, OrderType.asc, 10, 1, pagingController), 2);
+          pagingController.appendPage(mockProductService.fetchData('Nike', 100.0, 500.0, OrderType.asc, 10, 1, pagingController), 2);
           await tester.pump();
 
           // Verify initial items

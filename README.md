@@ -1,15 +1,15 @@
 # Scalapay Test
 
-Benvenuto in **Scalapay Test**, un'app Flutter moderna e intuitiva che consente di ricercare, filtrare e ordinare i prodotti con facilità. L'interfaccia utente è stata progettata per essere semplice da usare e visivamente accattivante, offrendo un'esperienza fluida su smartphone.
+Benvenuto in **Scalapay Test**, un'app Flutter moderna e intuitiva che consente di ricercare, filtrare e ordinare i prodotti con facilità. L'interfaccia utente è stata progettata per essere semplice da usare e visivamente accattivante offrendo un'esperienza fluida.
 
 
 ## 🎨 **Scelte estetiche**
 
-- **Icona**: l'icona dell'app è stata sostituita sia su Android tramite l'Image Asset mentre per iOS con un online icon generator online.
+- **Icona**: l'icona dell'app è stata sostituita sia su Android tramite l'Image Asset mentre per iOS tramite un tool icon generator online.
 - **Nome app**: Il nome dell'app è stata sostituito sia su Android tramite l'AndroidManifest.xml mentre per iOS all'interno dell'Runner.xcodeproj.
 - **Accorgimenti di usabilità**: Ho implementato alcuni accorgimenti di usabilità come:
     - il supporto al pull-down to refresh per ricaricare la ricerca corrente;
-    - i TextField mostrano la tastiera corrispondente al tipo di dato, l'InputAction corrispondete all'azione da svolgere chiudendo la tastira automaticamente;
+    - i TextField mostrano la tastiera corrispondente al tipo di dato, l'InputAction chiude la tastira automaticamente ed esegue l'azione corrispondete;
     - i filtri per prezzo non possono essere applicati quando il valore minimo è maggiore o uguale al valore massimo segnalando all'utente il preblema colorando i bordi di rosso;
     - i BottomSheet hanno un ritardo di qualche millisecondo per permettere all'utente di vedere la scelta selezionata;
 
@@ -19,7 +19,8 @@ Benvenuto in **Scalapay Test**, un'app Flutter moderna e intuitiva che consente 
 - **BLoC**: Gestisce complesse logiche di stato in modo organizzato e scalabile. Inoltre favorisce il testing e consente di mantenere un codice pulito e più manutenibile.
 - **GetIt**: Implementa la Dependency Injection in rendendo il codice pulito, modulare e facilmente testabile.
 - **InfiniteScrollPagination**: Implementa la paginazione dei risultati di ricerca in maniera semplice ma efficace.
-- **Mocktail**: Consente la scrittura degli UnitTest.
+- **Mocktail**: Consente la scrittura degli UnitTest per la UI.
+- **BlocTest**: Consente la scrittura degli UnitTest per BLoC.
 
 
 ## 🏁 **Setup del progetto**
